@@ -103,7 +103,11 @@ git show my-feature~~~
 
 ## I want to view the changes made in a given file.
 
+By default, the `show` command shows all of the changes in a given commit. We can limit the scope of the output by using the `--` and identifying a filepath:
 
+```sh
+
+```
 
 
 
