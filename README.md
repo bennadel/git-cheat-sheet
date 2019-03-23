@@ -258,6 +258,10 @@ git revert commit -m 1
 
 git reset --hard origin/master
 
+git pull master --rebase
+
+... "already on branch master"
+
 
 
 
