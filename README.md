@@ -103,11 +103,35 @@ git show my-feature~~~
 
 ## I want to view the changes made in a given file.
 
-By default, the `show` command shows all of the changes in a given commit. We can limit the scope of the output by using the `--` and identifying a filepath:
+By default, the `show` command shows all of the changes in a given commit. You can limit the scope of the output by using the `--` and identifying a filepath:
 
 ```sh
 # Outputs the changes made to the `README.md` file in the `head` commit of the `my-feature` branch.
 git show my-feature -- README.md
+```
+
+# I want to view the contents of a file in a given commit.
+
+By default, the `show` command shows us the changes made to a file in a given commit. However, if you want to view the entire contents of a file as defined at in a given commit, regardless of the changes made in that commit, you can use the `:` to identify a filepath:
+
+```sh
+# Outputs the contents of the `README.md` file as defined in the `head` commit of the `my-feature` branch.
+git show my-feature:README.md
+
+# Outputs the contents of the `README.md` file as defined in the `19e771` commit.
+git show 19e771:README.md
+```
+
+# I want to open the contents of a file in a given commit in my IDE.
+
+Since you're working on the command-line, the output of any git-command can be piped into another command. As such, you can use the `show` command to open a previous commit's file-content in your IDE of choice:
+
+```sh
+# Opens the `README.md` file from the `head` commit of the `my-feature` branch in the Sublime Text editor.
+git show my-feature:README.md | subl
+
+# Opens the `README.md` file from the `19e771` commit in the `less` viewer.
+git show 19e771:README.md | less
 ```
 
 
@@ -116,8 +140,11 @@ git show my-feature -- README.md
 
 
 
+Notes:
 
-
+git checkout commit -- file
+git cherry-pick commit
+git revert commit -m 1
 
 
 
