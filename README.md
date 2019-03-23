@@ -295,8 +295,6 @@ I want to list the files in a given commit
 
 I want to see which branches have already been | not been merged.
 
-I want to delete a branch.
-
 
 
 [bennadel]: https://www.bennadel.com
