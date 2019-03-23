@@ -262,7 +262,7 @@ Now, if the merge needs to be reverted, you can simply revert the "merge commit"
 
 ## I want to revert the merge of my feature branch into `master`.
 
-If you performed a `--ff-only` merge of your feature branch into `master`, there's no "easy" solution. You either have to reset the branch to an earlier commit (rewriting history); or, you have to revert the individual merges.
+If you performed a `--ff-only` merge of your feature branch into `master`, there's no "easy" solution. You either have to reset the branch to an earlier commit (rewriting history); or, you have to revert the individual commits in the merge.
 
 If, however, you performed a `--no-ff` merge that created a "merge commit", all you have to do is revert the merge commit:
 
@@ -272,9 +272,9 @@ git checkout master
 # Merge the feature branch in, creating a "merge commit".
 git merge --no-ff my-feature
 
-# On noes! I didn't mean to merge that in. Assuming that the "merge commit" is
-# now the `head` of `master`, we can revert back to the commit's fist parent,
-# the `master` branch: -m 1.
+# On noes! You didn't mean to merge that in. Assuming that the "merge commit"
+# is now the `head` of `master`, you can revert back to the commit's fist
+# parent, the `master` branch: -m 1.
 git revert -m 1 head
 ```
 
