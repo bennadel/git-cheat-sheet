@@ -7,6 +7,12 @@ The `git` API is so vast, I can barely manage to keep a fraction of one-percent 
 
 Future Ben, you are welcome!
 
+## I want to show the status of the current branch.
+
+```sh
+git status
+```
+
 ## I want to create a new branch based on the current branch.
 
 ```sh
@@ -57,7 +63,7 @@ git cherry-pick -
 
 ## I want to list the files that have been modified in the current working tree.
 
-By default, when you call `git diff`, you see all the content that has been modified in the current working tree. However, you can use the `--stat` to simply list the files that have been modified:
+By default, when you call `git diff`, you see all of the content that has been modified in the current working tree (and not yet staged). However, you can use the `--stat` to simply list the files that have been modified:
 
 ```sh
 git diff --stat
@@ -66,11 +72,7 @@ git diff --stat
 
 
 
-## I want to show the status of the current branch.
 
-```sh
-git status
-```
 
 
 
