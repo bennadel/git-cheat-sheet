@@ -124,6 +124,8 @@ And, since branch names are really just aliases for commits, you can use a branc
 git checkout my-feature
 
 git diff master
+git diff master..head
+git diff master..my-feature
 ```
 
 
