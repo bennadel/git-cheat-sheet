@@ -123,17 +123,13 @@ And, since branch names are really just aliases for commits, you can use a branc
 ```sh
 git checkout my-feature
 
+# At this point, the following are equivalent and output the changes between
+# the `head` commit of the `master` branch and the `head` commit of the
+# `my-feature` branch.
 git diff master
 git diff master..head
 git diff master..my-feature
 ```
-
-
-
-
-
-
-
 
 ## I want to view the changes made in a given file.
 
@@ -145,7 +141,7 @@ By default, the `show` command shows all of the changes in a given commit. You c
 git show my-feature -- README.md
 ```
 
-# I want to view the contents of a file in a given commit.
+## I want to view the contents of a file in a given commit.
 
 By default, the `show` command shows you the changes made to a file in a given commit. However, if you want to view the entire contents of a file as defined at in a given commit, regardless of the changes made in that commit, you can use the `:` to identify a filepath:
 
@@ -159,7 +155,7 @@ git show my-feature:README.md
 git show 19e771:README.md
 ```
 
-# I want to open the contents of a file in a given commit in my editor.
+## I want to open the contents of a file in a given commit in my editor.
 
 Since you're working on the command-line, the output of any git-command can be piped into another command. As such, you can use the `show` command to open a previous commit's file-content in your editor or viewer of choice:
 
@@ -172,7 +168,7 @@ git show my-feature:README.md | subl
 git show 19e771:README.md | less
 ```
 
-# I want to copy a file from a given commit into my current working tree.
+## I want to copy a file from a given commit into my current working tree.
 
 Normally, the `checkout` command will update the entire working tree to point to the given commit. However, you can use the `--` modifier to copy (or checkout) a single file from the given commit into your working tree:
 
@@ -185,16 +181,82 @@ git checkout my-feature
 git checkout master -- README.md
 ```
 
+## I want to copy the last commit from another branch into my branch.
+
+When you don't want to merge a branch into your current working tree, you can use the `cherry-pick` command to copy specific commit-changes into your working tree. Doing so creates a new commit on top of the current branch:
+
+```sh
+git checkout master
+
+# Copy the `head` commit-changes of the `my-feature` branch onto the `master`
+# branch. This will create a new commit on `master`.
+git cherry-pick my-feature
+```
+
+## I want to copy an earlier commit on the current branch to the `head`.
+
+Sometimes, after you understand why reverted code was breaking, you want to bring the reverted code back into play and then fix it. You _could_ use the `revert` command in order to "revert the revert"; but, such terminology is unattractive. As such, you can `cherry-pick` the reverted commit to bring it back into `head` where you can then fix it and commit it:
+
+```sh
+git checkout master
+
+# Assuming that `head~~~` and `19e771` are the same commit, the following are
+# equivalent and will copy the changes in `19e771` to the `head` of the 
+# current branch (as a new commit).
+git cherry-pick head~~~
+git cherry-pick 19e771
+```
+
+## I want to update the files in the current commit.
+
+If you want to make changes to a commit after you've already committed the changes in your current working tree, you can use the `--amend` modifier. This will add any staged changes to the existing `head` commit.
+
+```sh
+git commit -m "Woot, finally finished!"
+
+# Oops, you forgot a change. Edit the file and stage it.
+git touch oops.txt
+git add .
+
+# Adds the currently-staged changes (oops.txt) to the current `head` commit,
+# giving you a chance to updated the commit message.
+git commit --amend
+```
+
+## I want to copy `master` into my feature branch.
+
+At first, you may be tempted to simply `merge` your `master` branch into your feature branch, but doing so will create a Frankensteinian commit tree. Instead, you should `rebase` your feature branch on `master`. This will ensure that your feature commits are cleanly colocated in the commit tree:
+
+```sh
+git checkout my-feature
+
+# This will unwind the commits specific to the `my-feature` branch, pull in
+# the `master` commits, and then replay your `my-feature` commits.
+git rebase master
+```
+
+Once your `my-feature` branch has been rebased on `master`, you could then - if you wanted to - perform a `--ff-only` merge of your feature branch back into `master`:
+
+```sh
+git checkout master
+
+# Fast-forward merge of `my-feature` changes into `master`, which means there
+# is no creation of a "merge commit."
+git merge --ff-only my-feature
+```
+
+> **Caution**: When working on a team, where everyone uses different git workflows, you will definitely _want_ a "merge commit". This way, multi-commit merges can be reverted.
+
+
 
 
 
 
 Notes:
 
-git checkout commit -- file
-git cherry-pick commit
 git revert commit -m 1
-git rebase master
+
+git reset --hard origin/master
 
 
 
