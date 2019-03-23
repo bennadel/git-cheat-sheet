@@ -245,7 +245,7 @@ git checkout master
 git merge --ff-only my-feature
 ```
 
-When working on a team, where everyone uses different git workflows, you will definitely _want_ a "merge commit". This way, multi-commit merges can be easily be reverted. To force a "merge commit", you can use the `--no-ff` modifier:
+When working on a team, where everyone uses different git workflows, you will definitely _want_ a "merge commit". This way, multi-commit merges can be easily reverted. To force a "merge commit", you can use the `--no-ff` modifier:
 
 ```sh
 # Get the `my-feature` branch ready for merge.
@@ -257,6 +257,7 @@ git checkout master
 git merge --no-ff my-feature
 ```
 
+Now, if the merge needs to be reverted, you can simply revert the "merge commit" and all commits associated with the merge will be reverted.
 
 
 
