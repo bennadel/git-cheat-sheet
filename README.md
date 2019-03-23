@@ -245,7 +245,17 @@ git checkout master
 git merge --ff-only my-feature
 ```
 
-> **Caution**: When working on a team, where everyone uses different git workflows, you will definitely _want_ a "merge commit". This way, multi-commit merges can be reverted.
+When working on a team, where everyone uses different git workflows, you will definitely _want_ a "merge commit". This way, multi-commit merges can be easily be reverted. To force a "merge commit", you can use the `--no-ff` modifier:
+
+```sh
+# Get the `my-feature` branch ready for merge.
+git checkout my-feature
+git rebase master
+
+# Merge the `my-feature` branch into `master` creating a merge-commit.
+git checkout master
+git merge --no-ff my-feature
+```
 
 
 
