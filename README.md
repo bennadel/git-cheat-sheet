@@ -69,6 +69,22 @@ By default, when you call `git diff`, you see all of the content that has been m
 git diff --stat
 ```
 
+## I want to view the changes made in a given commit.
+
+```sh
+git checkout my-feature
+git add .
+git commit -m "Readme updates."
+
+git checkout master
+# Outputs the changes made in the `head` commit of the current (`master`) branch.
+git show
+# Outputs the changes made in the `head` commit of the `my-feature` branch.
+git show my-feature
+```
+
+
+
 
 
 
