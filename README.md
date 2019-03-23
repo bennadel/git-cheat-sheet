@@ -246,7 +246,7 @@ git checkout master
 git merge --ff-only my-feature
 ```
 
-When working on a team, where everyone uses different git workflows, you will definitely _want_ a "merge commit". This way, multi-commit merges can be easily reverted. To force a "merge commit", you can use the `--no-ff` modifier:
+That said, when you;re working on a team where everyone uses different git workflows, you will definitely _want_ a "merge commit". This way, multi-commit merges can be easily reverted. To force a "merge commit", you can use the `--no-ff` modifier:
 
 ```sh
 # Get the `my-feature` branch ready for merge.
@@ -283,8 +283,6 @@ git revert -m 1 head
 
 Notes:
 
-git revert commit -m 1
-
 git reset --hard origin/master
 
 git pull master --rebase
@@ -297,6 +295,7 @@ I want to see which branches have already been | not been merged.
 
 I want to delete a branch.
 
+Remove a staged file from the index.
 
 
 [bennadel]: https://www.bennadel.com
