@@ -262,6 +262,8 @@ git pull master --rebase
 
 ... "already on branch master"
 
+I want to list the files in a given commit
+
 
 
 
