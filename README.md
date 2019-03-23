@@ -216,7 +216,7 @@ If you want to make changes to a commit after you've already committed the chang
 git commit -m "Woot, finally finished!"
 
 # Oops, you forgot a change. Edit the file and stage it.
-git touch oops.txt
+touch oops.txt
 git add .
 
 # Adds the currently-staged changes (oops.txt) to the current `head` commit,
@@ -286,7 +286,7 @@ If you've edited some files and then change your mind about keeping those edits,
 
 ```sh
 git checkout my-feature
-git touch temp.txt
+touch temp.txt
 git add .
 
 # Remove the file from staging AND remove the changes from the file system.
@@ -297,10 +297,19 @@ If you call `git reset` without the `--hard` option, it will reset the staging t
 
 ## I want to remove unpublished changes from my branch.
 
-If you've committed changes to the local copy of a remote branch, but you want to undo those changes, you can `reset` the local branch to match the remote branch.
+If you've committed changes to the local copy of a remote (ie, published) branch, but you want to undo those changes, you can `reset` the local branch to match the remote branch:
 
 ```sh
+git checkout my-feature
 
+# Update the remote copy of the `my-feature` branch in order to make sure that
+# you are working with the most up-to-date remote content.
+git fetch origin my-feature
+
+# Now, reset the local copy of `my-feature` to match the published copy. This
+# will update your index and your local file system to match the published
+# version of `my-feature`.
+git reset --hard origin/my-feature
 ```
 
 
@@ -313,8 +322,6 @@ If you've committed changes to the local copy of a remote branch, but you want t
 
 
 Notes:
-
-git reset --hard origin/master
 
 git pull master --rebase
 
