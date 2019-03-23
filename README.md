@@ -31,15 +31,39 @@ git checkout -
 git checkout -
 ```
 
-The `-` token can also be used to merge-in the last branch you had checked-out:
+The `-` token can also be used to merge-in the last branch that you had checked-out:
 
 ```sh
 git checkout my-feature
 git add .
 git commit -m "Awesome updates."
 git checkout master
-git merge - # `-` refers to the `my-feature` branch.
+
+# At this point, the `-` refers to the `my-feature` branch.
+git merge -
 ```
+
+The `-` token can also be used to `cherry-pick` the most recent commit of the last branch that you had checked-out:
+
+```sh
+git checkout my-feature
+git add .
+git commit -m "Minor tweaks."
+
+git checkout master
+# At this point, the `-` refers to the `my-feature` branch.
+git cherry-pick -
+```
+
+## I want to list the files that have been modified in the current working tree.
+
+By default, when you call `git diff`, you see all the content that has been modified in the current working tree. However, you can use the `--stat` to simply list the files that have been modified:
+
+```sh
+git diff --stat
+```
+
+
 
 
 ## I want to show the status of the current branch.
