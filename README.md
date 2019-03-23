@@ -18,20 +18,20 @@ git checkout -b my-feature
 
 ## I want to checkout the previous branch that I was on.
 
-In some of the `git` commands, the `-` token refers to the last branch that you had checked-out. This makes it very easy to jump back and forth between two branches:
+In some of the `git` commands, the `-` token refers to the "last branch" that you had checked-out. This makes it very easy to jump back-and-forth between two branches:
 
 ```sh
 git checkout master
 git checkout my-feature
 
-# The `-` refers to the `master` branch.
+# At this point, the `-` refers to the `master` branch.
 git checkout -
 
-# The `-` refers to the `my-feature` branch.
+# At this point, the `-` refers to the `my-feature` branch.
 git checkout -
 ```
 
-This can also be used to merge-in the last branch you were one.
+The `-` token can also be used to merge-in the last branch you had checked-out:
 
 ```sh
 git checkout my-feature
