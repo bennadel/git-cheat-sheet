@@ -7,6 +7,7 @@ The `git` API is so vast, I can barely manage to keep a fraction of one-percent 
 
 Future Ben, you are welcome!
 
+
 ## I want to show the status of the current branch.
 
 ```sh
@@ -259,6 +260,23 @@ git merge --no-ff my-feature
 
 Now, if the merge needs to be reverted, you can simply revert the "merge commit" and all commits associated with the merge will be reverted.
 
+## I want to revert the merge of my feature branch into `master`.
+
+If you performed a `--ff-only` merge of your feature branch into `master`, there's no "easy" solution. You either have to reset the branch to an earlier commit (rewriting history); or, you have to revert the individual merges.
+
+If, however, you performed a `--no-ff` merge that created a "merge commit", all you have to do is revert the merge commit:
+
+```sh
+git checkout master
+
+# Merge the feature branch in, creating a "merge commit".
+git merge --no-ff my-feature
+
+# On noes! I didn't mean to merge that in. Assuming that the "merge commit" is
+# now the `head` of `master`, we can revert back to the commit's fist parent,
+# the `master` branch: -m 1.
+git revert -m 1 head
+```
 
 
 
@@ -275,6 +293,7 @@ git pull master --rebase
 
 I want to list the files in a given commit
 
+I want to see which branches have already been | not been merged.
 
 
 
