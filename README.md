@@ -77,7 +77,8 @@ When `show` is given a branch name, it will default to `head` - the last / most-
 ```sh
 git checkout master
 
-# Outputs the changes made to the `head` commit of the current (`master`) branch.
+# Outputs the changes made to the `head` commit of the current (`master`)
+# branch.
 git show
 
 # Outputs the changes made to the `head` commit of the `my-feature` branch.
@@ -90,7 +91,8 @@ You can also use the `show` command to target a specific commit that is not the 
 # Outputs the changes made in the commit with the given hash.
 git show 19e771
 
-# Outputs the changes made in in a previous commit of the current (`master`) branch.
+# Outputs the changes made in in a previous commit of the current (`master`)
+# branch.
 git show head~ # Show changes in first parent.
 git show head~~ # Show changes in first parent's first parent.
 git show head~~~ # Show changes in first parent's first parent's first parent.
@@ -101,12 +103,24 @@ git show my-feature~~
 git show my-feature~~~
 ```
 
+## I want to view the changes made across multiple commits.
+
+While the `show` command can show us changes in a given commit, you can use the `diff` command to show changes across multiple commits.
+
+
+
+
+
+
+
+
 ## I want to view the changes made in a given file.
 
 By default, the `show` command shows all of the changes in a given commit. You can limit the scope of the output by using the `--` and identifying a filepath:
 
 ```sh
-# Outputs the changes made to the `README.md` file in the `head` commit of the `my-feature` branch.
+# Outputs the changes made to the `README.md` file in the `head` commit of the
+# `my-feature` branch.
 git show my-feature -- README.md
 ```
 
@@ -115,26 +129,40 @@ git show my-feature -- README.md
 By default, the `show` command shows us the changes made to a file in a given commit. However, if you want to view the entire contents of a file as defined at in a given commit, regardless of the changes made in that commit, you can use the `:` to identify a filepath:
 
 ```sh
-# Outputs the contents of the `README.md` file as defined in the `head` commit of the `my-feature` branch.
+# Outputs the contents of the `README.md` file as defined in the `head` commit
+# of the `my-feature` branch.
 git show my-feature:README.md
 
-# Outputs the contents of the `README.md` file as defined in the `19e771` commit.
+# Outputs the contents of the `README.md` file as defined in the `19e771`
+# commit.
 git show 19e771:README.md
 ```
 
-# I want to open the contents of a file in a given commit in my IDE.
+# I want to open the contents of a file in a given commit in my editor.
 
-Since you're working on the command-line, the output of any git-command can be piped into another command. As such, you can use the `show` command to open a previous commit's file-content in your IDE of choice:
+Since you're working on the command-line, the output of any git-command can be piped into another command. As such, you can use the `show` command to open a previous commit's file-content in your editor or viewer of choice:
 
 ```sh
-# Opens the `README.md` file from the `head` commit of the `my-feature` branch in the Sublime Text editor.
+# Opens the `README.md` file from the `head` commit of the `my-feature` branch
+# in the Sublime Text editor.
 git show my-feature:README.md | subl
 
 # Opens the `README.md` file from the `19e771` commit in the `less` viewer.
 git show 19e771:README.md | less
 ```
 
+# I want to copy a file from a given commit into my current working tree.
 
+Normally, the `checkout` command will update the entire working tree to point to the given commit. However, you can use the `--` modifier to copy (or checkout) a single file from the given commit into your working tree:
+
+```sh
+git checkout my-feature
+
+# While staying on the `my-feature` branch, copy the `README.md` file from
+# the `master` branch into the current working tree. This will overwrite the
+# current version of `README.md` in your working tree.
+git checkout master -- README.md
+```
 
 
 
@@ -145,6 +173,7 @@ Notes:
 git checkout commit -- file
 git cherry-pick commit
 git revert commit -m 1
+git rebase master
 
 
 
