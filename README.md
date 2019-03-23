@@ -280,9 +280,34 @@ git revert -m 1 head
 
 ## I want to undo the changes I've made to my branch.
 
-If you've edited some files and then change your mind about keeping those edits, you can reset the branch using the `--hard` modifier. This will update the working tree - your file structure - to match the structure of the last commit.
+If you've edited some files and then change your mind about keeping those edits, you can reset the branch using the `--hard` modifier. This will update the working tree - your file structure - to match the structure of the last commit on the branch (`head`).
 
-**Caution**: you can lose data when using the `--hard` option.
+**Caution**: You will lose data when using the `--hard` option.
+
+```sh
+git checkout my-feature
+git touch temp.txt
+git add .
+
+# Remove the file from staging AND remove the changes from the file system.
+git reset --hard
+```
+
+If you call `git reset` without the `--hard` option, it will reset the staging to match the `head` of the branch, but it will leave your file system in place. As such, you will be left with "unstaged changes" that can be modified and re-committed.
+
+## I want to remove unpublished changes from my branch.
+
+If you've committed changes to the local copy of a remote branch, but you want to undo those changes, you can `reset` the local branch to match the remote branch.
+
+```sh
+
+```
+
+
+
+
+
+
 
 
 
@@ -302,6 +327,8 @@ I want to see which branches have already been | not been merged.
 I want to delete a branch.
 
 Remove a staged file from the index.
+
+i want to delete a remote branch.
 
 
 [bennadel]: https://www.bennadel.com
