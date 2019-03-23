@@ -278,6 +278,12 @@ git merge --no-ff my-feature
 git revert -m 1 head
 ```
 
+## I want to undo the changes I've made to my branch.
+
+If you've edited some files and then change your mind about keeping those edits, you can reset the branch using the `--hard` modifier. This will update the working tree - your file structure - to match the structure of the last commit.
+
+**Caution**: you can lose data when 
+
 
 
 
