@@ -105,7 +105,26 @@ git show my-feature~~~
 
 ## I want to view the changes made across multiple commits.
 
-While the `show` command can show us changes in a given commit, you can use the `diff` command to show changes across multiple commits.
+While the `show` command can show you changes in a given commit, you can use the `diff` command to show changes across multiple commits:
+
+```sh
+git checkout master
+
+# Outputs the changes between `head~` and `head` of the current branch. If
+# only one commit is provided, other commit is assumed to be `head`.
+git diff head~
+
+# Outputs the changes between the first commit and the second commit.
+git diff head~~~..head~~
+```
+
+And, since branch names are really just aliases for commits, you can use a branch name in order to show the changes between one branch and your branch:
+
+```sh
+git checkout my-feature
+
+git diff master
+```
 
 
 
@@ -126,7 +145,7 @@ git show my-feature -- README.md
 
 # I want to view the contents of a file in a given commit.
 
-By default, the `show` command shows us the changes made to a file in a given commit. However, if you want to view the entire contents of a file as defined at in a given commit, regardless of the changes made in that commit, you can use the `:` to identify a filepath:
+By default, the `show` command shows you the changes made to a file in a given commit. However, if you want to view the entire contents of a file as defined at in a given commit, regardless of the changes made in that commit, you can use the `:` to identify a filepath:
 
 ```sh
 # Outputs the contents of the `README.md` file as defined in the `head` commit
