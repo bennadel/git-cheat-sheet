@@ -547,3 +547,31 @@ s f7ee6ab Woot, finally got this working.
 
 Once saved, `git` will prompt you to provide a cleaner commit message. And, once provided, your four shameful commits will be squashed down into a single, cohesive, meaningful commit.
 
+### I want to squash several commits into one commit without using `rebase`.
+
+In the vast majority of cases, if your `git` workflow is clean and true and your feature branch is short-lived, an interactive rebase should be straightforward and pain-free. However, once you _make the mistake_ of periodically merging `master` into your feature branch, you are inviting a world of hurt. In such a case, you can use the `merge` command with the `--squash` modifier as an escape hatch.
+
+When you run `git merge --squash`, you copy the file-changes from one branch into another branch without actually copying the commit meta-data. Instead, the changes are brought-over as _staged changes_ on top of the current branch. At that point, you can commit all the staged changes as a single commit.
+
+Assuming your `my-feature` branch needs to be "fixed", you can use the following workflow:
+
+```sh
+# Assuming you are on the `my-feature` branch, which is the branch that needs
+# to be fixed, start off my renaming the branch as a backup (the `-m` modifier
+# performs a rename):
+git branch -m my-feature-backup
+
+# Now, checkout the `master` branch and use it to create a new, clean
+# `my-feature` branch starting point.
+git checkout master
+git checkout -b my-feature
+
+# At this point, your `my-feature` branch and your `master` branch should be
+# identical. Now, you can "squash merge" your old feature branch into the new
+# and clean `my-feature` branch:
+git merge --squash my-feature-backup
+
+# All the file-changes should now be in the `my-feature` branch as staged
+# edits ready to be committed.
+git commit -m "This feature is done and awesome."
+```
