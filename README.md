@@ -94,7 +94,7 @@ git diff --stat
 
 ### I want to view the changes made in a given commit.
 
-When `show` is given a branch name, it will default to `head` - the last / most-recent commit on the given branch:
+When `show` is given a branch name, it will default to `head` - the last or most-recent commit on the given branch:
 
 ```sh
 git checkout master
@@ -253,6 +253,19 @@ git add .
 # giving you a chance to updated the commit message.
 git commit --amend
 ```
+
+### I want to edit the current commit message.
+
+The `--amend` modifier can also be used to change the current commit message:
+
+```sh
+git add .
+git commit -m "This is greet."
+
+# Oh noes! You misspelled "great". You can edit the current commit message:
+git commit --amend -m "This is great."
+```
+
 
 ### I want to copy `master` into my feature branch.
 
