@@ -299,6 +299,25 @@ git merge --no-ff my-feature
 git revert -m 1 head
 ```
 
+### I want to extract changes I accidentally made to `master`.
+
+Sometimes, after you've finished working on your feature branch, you execute `git checkout master`, only find that you've been accidentally working on `master` the whole time (error: "Already on 'master'"). To fix this, you can `checkout` a new branch and `reset` your `master` branch:
+
+```sh
+git checkout master
+
+# Once on the `master` branch, create the `my-feature` branch as a copy of the
+# `master` branch. This way, your `my-feature` branch will contain all of your
+# recent changes.
+git checkout -b my-feature
+
+# Now that your changes are safely extracted, get back into your `master` 
+# branch and `reset` it with the `--hard` modifier so that your local index
+# and file system will match the remote copy.
+git checkout master
+git reset --hard origin/master
+```
+
 ### I want to undo the changes I've made to my branch.
 
 If you've edited some files and then change your mind about keeping those edits, you can reset the branch using the `--hard` modifier. This will update the working tree - your file structure - to match the structure of the last commit on the branch (`head`).
@@ -345,8 +364,6 @@ git reset --hard origin/my-feature
 Notes:
 
 git pull master --rebase
-
-... "already on branch master"
 
 I want to list the files in a given commit
 
