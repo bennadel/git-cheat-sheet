@@ -516,15 +516,15 @@ git commit -m "Woot, finally got this working."
 git rebase -i master
 ```
 
-As this point, `git` will open up an editor that outlines the various commits and asks you how you want to rearrange them. It should look something like this, with the commits listed in descending order (newest first):
+As this point, `git` will open up an editor that outlines the various commits and asks you how you want to rearrange them. It should look something like this, with the commits listed in ascending order (oldest first):
 
 ```sh
-pick f7ee6ab Woot, finally got this working.
-pick ce5ed14 Uggggg! Why is this so hard?
-pick e8214df Missed a bug.
 pick 27fb3d2 Getting close.
+pick e8214df Missed a bug.
+pick ce5ed14 Uggggg! Why is this so hard?
+pick f7ee6ab Woot, finally got this working.
 
-# Rebase f7ee6ab..27fb3d2 onto f7ee6ab (3 commands)
+# Rebase b0fced..f7ee6ab onto b0fced (4 commands)
 #
 # Commands:
 # p, pick = use commit
@@ -536,13 +536,13 @@ pick 27fb3d2 Getting close.
 # d, drop = remove commit
 ```
 
-At this point, you can identify the earlier commits as need to be squashed (`s`) up into the most recent one (the one you are `pick`ing):
+At this point, you can identify the later commits as needing to be squashed (`s`) down into the oldest commit (the one you are `pick`ing):
 
 ```sh
-pick f7ee6ab Woot, finally got this working.
-s ce5ed14 Uggggg! Why is this so hard?
+pick 27fb3d2 Getting close.
 s e8214df Missed a bug.
-s 27fb3d2 Getting close.
+s ce5ed14 Uggggg! Why is this so hard?
+s f7ee6ab Woot, finally got this working.
 ```
 
 Once saved, `git` will prompt you to provide a cleaner commit message. And, once provided, your four shameful commits will be squashed down into a single, cohesive, meaningful commit.
