@@ -14,6 +14,7 @@ Future Ben, you are welcome!
 * [I want to checkout the previous branch that I was on.](#i-want-to-checkout-the-previous-branch-that-i-was-on)
 * [I want to list the files that have been modified in the current working tree.](#i-want-to-list-the-files-that-have-been-modified-in-the-current-working-tree)
 * [I want to view the changes made in a given commit.](#i-want-to-view-the-changes-made-in-a-given-commit)
+* [I want to list the files changed in a given commit.](#i-want-to-list-the-files-changed-in-a-given-commit)
 * [I want to view the changes made across multiple commits.](#i-want-to-view-the-changes-made-across-multiple-commits)
 * [I want to view the changes made in a given file.](#i-want-to-view-the-changes-made-in-a-given-file)
 * [I want to view the contents of a file in a given commit.](#i-want-to-view-the-contents-of-a-file-in-a-given-commit)
@@ -22,10 +23,20 @@ Future Ben, you are welcome!
 * [I want to copy the last commit from another branch into my branch.](#i-want-to-copy-the-last-commit-from-another-branch-into-my-branch)
 * [I want to copy an earlier commit on the current branch to the `head`.](#i-want-to-copy-an-earlier-commit-on-the-current-branch-to-the-head)
 * [I want to update the files in the current commit.](#i-want-to-update-the-files-in-the-current-commit)
+* [I want to edit the current commit message.](#i-want-to-edit-the-current-commit-message)
 * [I want to copy `master` into my feature branch.](#i-want-to-copy-master-into-my-feature-branch)
 * [I want to revert the merge of my feature branch into `master`.](#i-want-to-revert-the-merge-of-my-feature-branch-into-master)
+* [I want to extract changes I accidentally made to `master`.](#i-want-to-extract-changes-i-accidentally-made-to-master)
 * [I want to undo the changes I've made to my branch.](#i-want-to-undo-the-changes-ive-made-to-my-branch)
 * [I want to remove unpublished changes from my branch.](#i-want-to-remove-unpublished-changes-from-my-branch)
+* [I want to see which branches have already been merged into `master`.](#i-want-to-see-which-branches-have-already-been-merged-into-master)
+* [I want to see which branches have not yet been merged into `master`.](#i-want-to-see-which-branches-have-not-yet-been-merged-into-master)
+* [I want to delete my feature branch.](#i-want-to-delete-my-feature-branch)
+* [I want to delete a remote branch.](#i-want-to-delete-a-remote-branch)
+* [I want to update `master` because my `push` was rejected.](#i-want-to-update-master-because-my-push-was-rejected)
+* [I want to remove a file from my staging area.](#i-want-to-remove-a-file-from-my-staging-area)
+* [I want to squash several commits into one (or more) commits.](#i-want-to-squash-several-commits-into-one-or-more-commits)
+* [I want to squash several commits into one commit without using `rebase`.](#i-want-to-squash-several-commits-into-one-commit-without-using-rebase)
 
 ## Use Cases
 
