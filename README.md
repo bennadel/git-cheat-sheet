@@ -489,5 +489,12 @@ Your commit history is a representation or your personality. It is a manifestati
 The "interactive rebase" gives you an opportunity to indicate how intermediary commits should be rearranged. Some commits can be "squashed" (combined) together. Others can omitted (remove). And others can be edited. When performing an interactive rebase, you have to tell `git` which commit to use as the starting point. If you're on an up-to-date feature branch, the starting point _should be_ `master`.
 
 ```sh
+git add .
+git commit -m "Getting close."
+
+git add .
+git commit -m "Getting closer."
+
 git rebase -i master
 ```
+
