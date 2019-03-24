@@ -444,11 +444,26 @@ git pull --rebase
 git push origin master
 ```
 
+### I want to remove a file from my staging area.
 
+If you accidentally added too many files to the staging area (in preparation for a `git commit`), you can use `rm` to remove them from the staging area but keep them in the working tree:
 
+```sh
+git add .
 
+# Oh noes! You didn't mean to add all the files to the staging area. You can
+# remove some of the staged files using the `--cached` modifier:
+git rm --cached secrets.config
+```
 
+If you accidentally added an entire directory to the staging area, you can add the `-r` modifier to recursively apply the `rm` command:
 
-Notes:
+```sh
+git add .
 
-Remove a staged file from the index.
+# Oh noes! You didn't mean to add the ./config directory. You can recursively
+# remove it with the `-r` modifier:
+git rm --cached -r config/.
+```
+
+When you `rm` files using `--cached`, they will remain in your working tree and will become "unstaged" changes.
