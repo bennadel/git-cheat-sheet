@@ -424,6 +424,15 @@ If you've committed changes to `master` but you forgot to `pull` recent changes 
 git checkout master
 git merge --no-ff- my-feature
 
+# Oh noes! You forgot to pull in the latest remote copy of `master` before you
+# merged your `my-feature` commits. No problem, just `--rebase` your local
+# `master` on the remote branch. This will move your local changes to the tip
+# of the `master` branch.
+git pull --rebase 
+
+# Now that you've pulled-in the remote changes, you should be able to push
+# your updated `master` branch.
+git push origin master
 ```
 
 
