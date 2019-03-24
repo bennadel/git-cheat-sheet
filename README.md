@@ -574,4 +574,8 @@ git merge --squash my-feature-backup
 # All the file-changes should now be in the `my-feature` branch as staged
 # edits ready to be committed.
 git commit -m "This feature is done and awesome."
+
+# Delete the old backup branch as it is no longer needed. You will have to
+# force delete (`-D`) it since it was never merged into `master`.
+git branch -D my-feature-backup
 ```
