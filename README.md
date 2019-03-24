@@ -1,7 +1,7 @@
 
 # git Cheat Sheet
 
-by [Ben Nadel][bennadel] for _future Ben Nadel_
+by [Ben Nadel](https://www.bennadel.com) for _future Ben Nadel_
 
 The `git` API is so vast, I can barely manage to keep a fraction of one-percent of it in my head. As such, I wanted to outline a few of the commands that I commonly (and sometimes uncommonly) reach for. This way, when I inevitably get stuck and my brain fails me, I have something that I can refer back to.
 
@@ -378,7 +378,18 @@ git branch --no-merged
 
 ### I want to delete a remote branch.
 
+When you delete a branch using `git branch -d`, it deletes your local copy; but, it doesn't delete the remote copy from your origin (GitHub). To delete the remote copy, you have to `push` the branch using the `:` prefix:
 
+```sh
+git checkout master
+
+# Delete your local copy of the `my-feature` branch.
+git branch -d my-feature
+
+# Delete the remote copy of the `my-feature` branch from the origin. The `:`
+# prefix sends this through as a "delete" command for the given branch.
+git push origin :my-feature
+```
 
 
 
@@ -395,9 +406,3 @@ I want to list the files in a given commit
 I want to delete a branch.
 
 Remove a staged file from the index.
-
-i want to delete a remote branch.
-
-
-[bennadel]: https://www.bennadel.com
-
