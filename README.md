@@ -256,7 +256,7 @@ git commit --amend
 
 ### I want to edit the current commit message.
 
-The `--amend` modifier can also be used to change the current commit message:
+In addition to adding files to the current commit, the `--amend` modifier can also be used to change the current commit message:
 
 ```sh
 git add .
@@ -266,6 +266,7 @@ git commit -m "This is greet."
 git commit --amend -m "This is great."
 ```
 
+Note that if you omit the `-m message` portion of this command, you will be able to edit the commit message in your primary editor.
 
 ### I want to copy `master` into my feature branch.
 
@@ -480,3 +481,13 @@ git rm --cached -r config/.
 ```
 
 When you `rm` files using `--cached`, they will remain in your working tree and will become "unstaged" changes.
+
+### I want to squash several commits into one (or more) commits.
+
+Your commit history is a representation or your personality. It is a manifestation of your self-respect and the respect you have for your team. As such, you will often need to rewrite your feature branch's history before merging it into `master`. This allows you to get rid of intermediary commit messages like, _"still working on it."_ and _"Meh, missed a bug."_. To do this, you can perform an "interactive rebase".
+
+The "interactive rebase" gives you an opportunity to indicate how intermediary commits should be rearranged. Some commits can be "squashed" (combined) together. Others can omitted (remove). And others can be edited. When performing an interactive rebase, you have to tell `git` which commit to use as the starting point. If you're on an up-to-date feature branch, the starting point _should be_ `master`.
+
+```sh
+git rebase -i master
+```
