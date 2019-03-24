@@ -352,6 +352,31 @@ git fetch origin my-feature
 git reset --hard origin/my-feature
 ```
 
+### I want to see which branches have already been merged into `master`.
+
+From any branch, you can locate the merged-in branches (that can be safely deleted) by using the `--merged` modifier:
+
+```sh
+git checkout master
+
+# List all of the local branches that have been merged into `master`. This
+# command will be relative the branch you currently have checked-out.
+git branch --merged
+```
+
+### I want to see which branches have not yet been merged into `master`.
+
+From any branch, you can locate the unmerged branches by using the `--no-merged` modifier:
+
+```sh
+git checkout master
+
+# List all of the local branches that have NOT YET been merged into `master`.
+# This command will be relative the branch you currently have checked-out.
+git branch --no-merged
+```
+
+### I want to delete a remote branch.
 
 
 
@@ -366,8 +391,6 @@ Notes:
 git pull master --rebase
 
 I want to list the files in a given commit
-
-I want to see which branches have already been | not been merged.
 
 I want to delete a branch.
 
