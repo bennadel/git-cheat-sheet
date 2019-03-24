@@ -536,7 +536,7 @@ pick 27fb3d2 Getting close.
 # d, drop = remove commit
 ```
 
-At this point, you can identify the earlier commits as need to be squashed (s) up into the most recent one:
+At this point, you can identify the earlier commits as need to be squashed (`s`) up into the most recent one (the one you are `pick`ing):
 
 ```sh
 pick f7ee6ab Woot, finally got this working.
