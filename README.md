@@ -546,3 +546,4 @@ s 27fb3d2 Getting close.
 ```
 
 Once saved, `git` will prompt you to provide a cleaner commit message. And, once provided, your four shameful commits will be squashed down into a single, cohesive, meaningful commit.
+
