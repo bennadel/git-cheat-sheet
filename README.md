@@ -376,6 +376,30 @@ git checkout master
 git branch --no-merged
 ```
 
+### I want to delete my feature branch.
+
+After you're merged your feature branch into `master`, you can delete your feature branch using the `branch` command:
+
+```sh
+# Merge your `my-feature` branch into `master` creating a "merge commit."
+git checkout master
+git merge --no-ff my-feature
+
+# Safely delete the merged-in `my-feature` branch. The `-d` modifier will
+# error-out if given branch has not yet been merged into the current branch.
+git branch -d my-feature
+```
+
+If you want to abandon a feature branch, you can use the `-D` modifier to force delete it even if it has not yet been merged into `master`:
+
+```sh
+git checkout master
+
+# Force-delete the `my-feature` branch even though it has not been merged into
+# the `master` branch.
+git branch -D my-feature
+```
+
 ### I want to delete a remote branch.
 
 When you delete a branch using `git branch -d`, it deletes your local copy; but, it doesn't delete the remote copy from your origin (GitHub). To delete the remote copy, you have to `push` the branch using the `:` prefix:
@@ -383,7 +407,8 @@ When you delete a branch using `git branch -d`, it deletes your local copy; but,
 ```sh
 git checkout master
 
-# Delete your local copy of the `my-feature` branch.
+# Safely delete your local copy of the `my-feature` branch. The `-d` modifier
+# will error-out if the given branch has not been fully-merged into `master`.
 git branch -d my-feature
 
 # Delete the remote copy of the `my-feature` branch from the origin. The `:`
@@ -402,7 +427,5 @@ Notes:
 git pull master --rebase
 
 I want to list the files in a given commit
-
-I want to delete a branch.
 
 Remove a staged file from the index.
