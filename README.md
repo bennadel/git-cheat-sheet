@@ -37,16 +37,21 @@ Future Ben, you are welcome!
 * [I want to remove a file from my staging area.](#i-want-to-remove-a-file-from-my-staging-area)
 * [I want to squash several commits into one (or more) commits.](#i-want-to-squash-several-commits-into-one-or-more-commits)
 * [I want to squash several commits into one commit without using `rebase`.](#i-want-to-squash-several-commits-into-one-commit-without-using-rebase)
+* [I want to temporarily set-aside my feature work.](#i-want-to-temporarily-set-aside-my-feature-work)
 
 ## Use Cases
 
 ### I want to show the status of the current branch.
+
+The `status` command shows differences between the working tree, the index, and `head` commit.
 
 ```sh
 git status
 ```
 
 ### I want to create a new branch based on the current branch.
+
+In general, you want to implement new features in short-lived "feature branches" so that changes can be isolated.
 
 ```sh
 git checkout master
@@ -471,7 +476,7 @@ git push origin master
 
 ### I want to remove a file from my staging area.
 
-If you accidentally added too many files to the staging area (in preparation for a `git commit`), you can use `rm` to remove them from the staging area but keep them in the working tree:
+If you accidentally added too many files to the staging area (in preparation for a `git commit`), you can use `rm --cached` to remove them from the staging area but keep them in the working tree:
 
 ```sh
 git add .
@@ -590,3 +595,34 @@ git commit -m "This feature is done and awesome."
 # force delete (`-D`) it since it was never merged into `master`.
 git branch -D my-feature-backup
 ```
+
+### I want to temporarily set-aside my feature work.
+
+The life of a developer is typically "interrupt driven". As such, there is often a need to briefly set aside your current work in order to attend to more pressing matters. In such a case, it is _tempting_ to use `git stash` and `git stash pop` to store pending changes. But, _do not do this_. Stashing code requires unnecessary mental overhead. Instead, simply commit the changes to your current feature branch and the perform an interactive rebase later on to clean up your commits:
+
+```sh
+# Oh noes! Something urgent just came up - commit your changes to your feature
+# branch and then go attend to the more pressing work.
+git add .
+git commit -m "Saving current work - jumping to more urgent matters."
+
+git checkout master
+```
+
+Now, you never have to remember where those pending changes are. This guarantees that you won't lose your work.
+
+If you were working directly on `master` when urgent matters came up, you can still avoid having to use `git stash`. To keep your work, simply checkout a new branch and the commit your pending changes to that branch:
+
+```sh
+# Oh noes! Something urgent just came up - checkout a new branch. This will
+# move all of your current state (staged and unstaged) over to the new branch.
+git checkout -b temp-work
+
+# Commit any unstaged changes.
+git add .
+git commit -m "Saving current work - jumping to more urgent matters."
+
+git checkout master
+```
+
+Now, your `master` branch should be back in a pristine state.
