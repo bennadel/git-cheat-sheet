@@ -7,14 +7,35 @@ The `git` API is so vast, I can barely manage to keep a fraction of one-percent 
 
 Future Ben, you are welcome!
 
+## Table of Contents
 
-## I want to show the status of the current branch.
+* [I want to show the status of the current branch.](#i-want-to-show-the-status-of-the-current-branch)
+* [I want to create a new branch based on the current branch.](#i-want-to-create-a-new-branch-based-on-the-current-branch)
+* [I want to checkout the previous branch that I was on.](#i-want-to-checkout-the-previous-branch-that-i-was-on)
+* [I want to list the files that have been modified in the current working tree.](#i-want-to-list-the-files-that-have-been-modified-in-the-current-working-tree)
+* [I want to view the changes made in a given commit.](#i-want-to-view-the-changes-made-in-a-given-commit)
+* [I want to view the changes made across multiple commits.](#i-want-to-view-the-changes-made-across-multiple-commits)
+* [I want to view the changes made in a given file.](#i-want-to-view-the-changes-made-in-a-given-file)
+* [I want to view the contents of a file in a given commit.](#i-want-to-view-the-contents-of-a-file-in-a-given-commit)
+* [I want to open the contents of a file in a given commit in my editor.](#i-want-to-open-the-contents-of-a-file-in-a-given-commit-in-my-editor)
+* [I want to copy a file from a given commit into my current working tree.](#i-want-to-copy-a-file-from-a-given-commit-into-my-current-working-tree)
+* [I want to copy the last commit from another branch into my branch.](#i-want-to-copy-the-last-commit-from-another-branch-into-my-branch)
+* [I want to copy an earlier commit on the current branch to the `head`.](#i-want-to-copy-an-earlier-commit-on-the-current-branch-to-the-head)
+* [I want to update the files in the current commit.](#i-want-to-update-the-files-in-the-current-commit)
+* [I want to copy `master` into my feature branch.](#i-want-to-copy-master-into-my-feature-branch)
+* [I want to revert the merge of my feature branch into `master`.](#i-want-to-revert-the-merge-of-my-feature-branch-into-master)
+* [I want to undo the changes I've made to my branch.](#i-want-to-undo-the-changes-ive-made-to-my-branch)
+* [I want to remove unpublished changes from my branch.](#i-want-to-remove-unpublished-changes-from-my-branch)
+
+## Use Cases
+
+### I want to show the status of the current branch.
 
 ```sh
 git status
 ```
 
-## I want to create a new branch based on the current branch.
+### I want to create a new branch based on the current branch.
 
 ```sh
 git checkout master
@@ -23,7 +44,7 @@ git checkout master
 git checkout -b my-feature
 ```
 
-## I want to checkout the previous branch that I was on.
+### I want to checkout the previous branch that I was on.
 
 In some of the `git` commands, the `-` token refers to the "last branch" that you had checked-out. This makes it very easy to jump back-and-forth between two branches:
 
@@ -63,7 +84,7 @@ git checkout master
 git cherry-pick -
 ```
 
-## I want to list the files that have been modified in the current working tree.
+### I want to list the files that have been modified in the current working tree.
 
 By default, when you call `git diff`, you see all of the content that has been modified in the current working tree (and not yet staged). However, you can use the `--stat` to simply list the files that have been modified:
 
@@ -71,7 +92,7 @@ By default, when you call `git diff`, you see all of the content that has been m
 git diff --stat
 ```
 
-## I want to view the changes made in a given commit.
+### I want to view the changes made in a given commit.
 
 When `show` is given a branch name, it will default to `head` - the last / most-recent commit on the given branch:
 
@@ -104,7 +125,7 @@ git show my-feature~~
 git show my-feature~~~
 ```
 
-## I want to view the changes made across multiple commits.
+### I want to view the changes made across multiple commits.
 
 While the `show` command can show you changes in a given commit, you can use the `diff` command to show changes across multiple commits:
 
@@ -132,7 +153,7 @@ git diff master..head
 git diff master..my-feature
 ```
 
-## I want to view the changes made in a given file.
+### I want to view the changes made in a given file.
 
 By default, the `show` command shows all of the changes in a given commit. You can limit the scope of the output by using the `--` and identifying a filepath:
 
@@ -142,7 +163,7 @@ By default, the `show` command shows all of the changes in a given commit. You c
 git show my-feature -- README.md
 ```
 
-## I want to view the contents of a file in a given commit.
+### I want to view the contents of a file in a given commit.
 
 By default, the `show` command shows you the changes made to a file in a given commit. However, if you want to view the entire contents of a file as defined at in a given commit, regardless of the changes made in that commit, you can use the `:` to identify a filepath:
 
@@ -156,7 +177,7 @@ git show my-feature:README.md
 git show 19e771:README.md
 ```
 
-## I want to open the contents of a file in a given commit in my editor.
+### I want to open the contents of a file in a given commit in my editor.
 
 Since you're working on the command-line, the output of any git-command can be piped into another command. As such, you can use the `show` command to open a previous commit's file-content in your editor or viewer of choice:
 
@@ -169,7 +190,7 @@ git show my-feature:README.md | subl
 git show 19e771:README.md | less
 ```
 
-## I want to copy a file from a given commit into my current working tree.
+### I want to copy a file from a given commit into my current working tree.
 
 Normally, the `checkout` command will update the entire working tree to point to the given commit. However, you can use the `--` modifier to copy (or checkout) a single file from the given commit into your working tree:
 
@@ -182,7 +203,7 @@ git checkout my-feature
 git checkout master -- README.md
 ```
 
-## I want to copy the last commit from another branch into my branch.
+### I want to copy the last commit from another branch into my branch.
 
 When you don't want to merge a branch into your current working tree, you can use the `cherry-pick` command to copy specific commit-changes into your working tree. Doing so creates a new commit on top of the current branch:
 
@@ -194,7 +215,7 @@ git checkout master
 git cherry-pick my-feature
 ```
 
-## I want to copy an earlier commit on the current branch to the `head`.
+### I want to copy an earlier commit on the current branch to the `head`.
 
 Sometimes, after you understand why reverted code was breaking, you want to bring the reverted code back into play and then fix it. You _could_ use the `revert` command in order to "revert the revert"; but, such terminology is unattractive. As such, you can `cherry-pick` the reverted commit to bring it back into `head` where you can then fix it and commit it:
 
@@ -208,7 +229,7 @@ git cherry-pick head~~~
 git cherry-pick 19e771
 ```
 
-## I want to update the files in the current commit.
+### I want to update the files in the current commit.
 
 If you want to make changes to a commit after you've already committed the changes in your current working tree, you can use the `--amend` modifier. This will add any staged changes to the existing `head` commit.
 
@@ -224,7 +245,7 @@ git add .
 git commit --amend
 ```
 
-## I want to copy `master` into my feature branch.
+### I want to copy `master` into my feature branch.
 
 At first, you may be tempted to simply `merge` your `master` branch into your feature branch, but doing so will create a Frankensteinian commit tree. Instead, you should `rebase` your feature branch on `master`. This will ensure that your feature commits are cleanly colocated in the commit tree:
 
@@ -260,7 +281,7 @@ git merge --no-ff my-feature
 
 Now, if the merge needs to be reverted, you can simply revert the "merge commit" and all commits associated with the merge will be reverted.
 
-## I want to revert the merge of my feature branch into `master`.
+### I want to revert the merge of my feature branch into `master`.
 
 If you performed a `--ff-only` merge of your feature branch into `master`, there's no "easy" solution. You either have to reset the branch to an earlier commit (rewriting history); or, you have to revert the individual commits in the merge.
 
@@ -278,7 +299,7 @@ git merge --no-ff my-feature
 git revert -m 1 head
 ```
 
-## I want to undo the changes I've made to my branch.
+### I want to undo the changes I've made to my branch.
 
 If you've edited some files and then change your mind about keeping those edits, you can reset the branch using the `--hard` modifier. This will update the working tree - your file structure - to match the structure of the last commit on the branch (`head`).
 
@@ -295,7 +316,7 @@ git reset --hard
 
 If you call `git reset` without the `--hard` option, it will reset the staging to match the `head` of the branch, but it will leave your file system in place. As such, you will be left with "unstaged changes" that can be modified and re-committed.
 
-## I want to remove unpublished changes from my branch.
+### I want to remove unpublished changes from my branch.
 
 If you've committed changes to the local copy of a remote (ie, published) branch, but you want to undo those changes, you can `reset` the local branch to match the remote branch:
 
