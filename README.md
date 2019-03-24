@@ -3,7 +3,7 @@
 
 by [Ben Nadel](https://www.bennadel.com) for _future Ben Nadel_
 
-The `git` API is so vast, I can barely manage to keep a fraction of one-percent of it in my head. As such, I wanted to outline a few of the commands that I commonly (and sometimes uncommonly) reach for. This way, when I inevitably get stuck and my brain fails me, I have something that I can refer back to.
+The [`git` API is so vast](https://git-scm.com/docs) and so esoteric, I can barely manage to keep a fraction of one-percent of it in my head. As such, I wanted to outline a few of the commands that I commonly (and sometimes uncommonly) reach for. This way, when I inevitably get stuck and my brain fails me, I have something that I can refer back to.
 
 Future Ben, you are welcome!
 
