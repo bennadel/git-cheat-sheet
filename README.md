@@ -416,11 +416,18 @@ git branch -d my-feature
 git push origin :my-feature
 ```
 
+### I want to update `master` because my `push` was rejected.
+
+If you've committed changes to `master` but you forgot to `pull` recent changes from the remote `master` branch, your next `push` will be rejected with an error that looks like, _"Updates were rejected because the tip of your current branch is behind its remote counterpart"_. To fix this, you can use the `--rebase` modifier:
+
+```sh
+git checkout master
+git merge --no-ff- my-feature
+
+```
 
 
 
-
-test
 
 
 
