@@ -125,6 +125,15 @@ git show my-feature~~
 git show my-feature~~~
 ```
 
+### I want to list the files changed in a given commit.
+
+Just as with `git diff`, you can limit the output of the `git show` command using the `--stat` modifier. This will list the files that were changed in the given commit:
+
+```sh
+# Outputs the list of files changed in the commit with the given hash.
+git show 19e771 --stat
+```
+
 ### I want to view the changes made across multiple commits.
 
 While the `show` command can show you changes in a given commit, you can use the `diff` command to show changes across multiple commits:
@@ -422,7 +431,7 @@ If you've committed changes to `master` but you forgot to `pull` recent changes 
 
 ```sh
 git checkout master
-git merge --no-ff- my-feature
+git merge --no-ff my-feature
 
 # Oh noes! You forgot to pull in the latest remote copy of `master` before you
 # merged your `my-feature` commits. No problem, just `--rebase` your local
@@ -441,9 +450,5 @@ git push origin master
 
 
 Notes:
-
-git pull master --rebase
-
-I want to list the files in a given commit
 
 Remove a staged file from the index.
