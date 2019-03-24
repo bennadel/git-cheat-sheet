@@ -489,12 +489,60 @@ Your commit history is a representation or your personality. It is a manifestati
 The "interactive rebase" gives you an opportunity to indicate how intermediary commits should be rearranged. Some commits can be "squashed" (combined) together. Others can omitted (remove). And others can be edited. When performing an interactive rebase, you have to tell `git` which commit to use as the starting point. If you're on an up-to-date feature branch, the starting point _should be_ `master`.
 
 ```sh
+# Create the `my-feature` branch based on `master`.
+git checkout master
+git checkout -b my-feature
+
+# ... changes to the working tree (your file system).
 git add .
 git commit -m "Getting close."
 
+# ... changes to the working tree (your file system).
 git add .
-git commit -m "Getting closer."
+git commit -m "Missed a bug."
 
+# ... changes to the working tree (your file system).
+git add .
+git commit -m "Uggggg! Why is this so hard?"
+
+# ... changes to the working tree (your file system).
+git add .
+git commit -m "Woot, finally got this working."
+
+# At this point, your commit history is sloppy and would bring much shame on
+# your family if it ended-up in `master`. As such, you need to squash the
+# commits down into a single commit using an interactive rebase. Here, you're
+# telling `git` to use the `master` commit as the starting point:
 git rebase -i master
 ```
 
+As this point, `git` will open up an editor that outlines the various commits and asks you how you want to rearrange them. It should look something like this, with the commits listed in descending order (newest first):
+
+```sh
+pick f7ee6ab Woot, finally got this working.
+pick ce5ed14 Uggggg! Why is this so hard?
+pick e8214df Missed a bug.
+pick 27fb3d2 Getting close.
+
+# Rebase f7ee6ab..27fb3d2 onto f7ee6ab (3 commands)
+#
+# Commands:
+# p, pick = use commit
+# r, reword = use commit, but edit the commit message
+# e, edit = use commit, but stop for amending
+# s, squash = use commit, but meld into previous commit
+# f, fixup = like "squash", but discard this commit's log message
+# x, exec = run command (the rest of the line) using shell
+# d, drop = remove commit
+```
+
+At this point, you can identify the earlier commits as need to be squashed (s) up into the most recent one:
+
+```sh
+pick f7ee6ab Woot, finally got this working.
+s ce5ed14 Uggggg! Why is this so hard?
+s e8214df Missed a bug.
+s 27fb3d2 Getting close.
+```
+
+Once saved, `git` will prompt you to provide a cleaner commit message. And, once provided, your four shameful commits will be squashed down into a single, cohesive, meaningful commit.
