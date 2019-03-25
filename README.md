@@ -49,9 +49,9 @@ The `status` command shows differences between the working tree, the index, and 
 git status
 ```
 
-### I want to create a new branch based on the current branch.
+### I want to create a new branch that is based on the current branch.
 
-In general, you want to implement new features in short-lived "feature branches" so that changes can be isolated.
+In general, you want to implement new features in short-lived "feature branches" so that changes can be isolated. You can use the `checkout` command to create a new branch based on the current branch:
 
 ```sh
 git checkout master
@@ -79,6 +79,7 @@ The `-` token can also be used to merge-in the last branch that you had checked-
 
 ```sh
 git checkout my-feature
+# ... changes to the working tree (your file system).
 git add .
 git commit -m "Awesome updates."
 git checkout master
@@ -91,6 +92,7 @@ The `-` token can also be used to `cherry-pick` the most recent commit of the la
 
 ```sh
 git checkout my-feature
+# ... changes to the working tree (your file system).
 git add .
 git commit -m "Minor tweaks."
 
@@ -102,13 +104,13 @@ git cherry-pick -
 
 ### I want to list the files that have been modified in the current working tree.
 
-By default, when you call `git diff`, you see all of the content that has been modified in the current working tree (and not yet staged). However, you can use the `--stat` to simply list the files that have been modified:
+By default, when you call `git diff`, you see all of the content that has been modified in the current working tree (and not yet staged). However, you can use the `--stat` modifier to simply list the files that have been modified:
 
 ```sh
 git diff --stat
 ```
 
-### I want to view the changes made in a given commit.
+### I want to view the changes that were made in a given commit.
 
 When `show` is given a branch name, it will default to `head` - the last or most-recent commit on the given branch:
 
@@ -141,7 +143,7 @@ git show my-feature~~
 git show my-feature~~~
 ```
 
-### I want to list the files changed in a given commit.
+### I want to list the files that were changed in a given commit.
 
 Just as with `git diff`, you can limit the output of the `git show` command using the `--stat` modifier. This will list the files that were changed in the given commit:
 
@@ -150,7 +152,7 @@ Just as with `git diff`, you can limit the output of the `git show` command usin
 git show 19e771 --stat
 ```
 
-### I want to view the changes made across multiple commits.
+### I want to view the changes that were made across multiple commits.
 
 While the `show` command can show you changes in a given commit, you can use the `diff` command to show changes across multiple commits:
 
@@ -178,19 +180,22 @@ git diff master..head
 git diff master..my-feature
 ```
 
-### I want to view the changes made in a given file.
+### I want to view the changes that were made in a given file.
 
-By default, the `show` command shows all of the changes in a given commit. You can limit the scope of the output by using the `--` and identifying a filepath:
+By default, the `show` command shows all of the changes in a given commit. You can limit the scope of the output by using the `--` modifier and identifying a filepath:
 
 ```sh
 # Outputs the changes made to the `README.md` file in the `head` commit of the
 # `my-feature` branch.
 git show my-feature -- README.md
+
+# Outputs the changes made to the `README.md` file in the `19e771` commit.
+git show 19e771 -- README.md
 ```
 
 ### I want to view the contents of a file in a given commit.
 
-By default, the `show` command shows you the changes made to a file in a given commit. However, if you want to view the entire contents of a file as defined at in a given commit, regardless of the changes made in that commit, you can use the `:` to identify a filepath:
+By default, the `show` command shows you the changes made to a file in a given commit. However, if you want to view the entire contents of a file as defined at that time of a given commit, regardless of the changes made in that particular commit, you can use the `:` modifier to identify a filepath:
 
 ```sh
 # Outputs the contents of the `README.md` file as defined in the `head` commit
@@ -217,7 +222,7 @@ git show 19e771:README.md | less
 
 ### I want to copy a file from a given commit into my current working tree.
 
-Normally, the `checkout` command will update the entire working tree to point to the given commit. However, you can use the `--` modifier to copy (or checkout) a single file from the given commit into your working tree:
+Normally, the `checkout` command will update the entire working tree to point to a given commit. However, you can use the `--` modifier to copy (or checkout) a single file from the given commit into your working tree:
 
 ```sh
 git checkout my-feature
@@ -236,13 +241,13 @@ When you don't want to merge a branch into your current working tree, you can us
 git checkout master
 
 # Copy the `head` commit-changes of the `my-feature` branch onto the `master`
-# branch. This will create a new commit on `master`.
+# branch. This will create a new `head` commit on `master`.
 git cherry-pick my-feature
 ```
 
-### I want to copy an earlier commit on the current branch to the `head`.
+### I want to copy an earlier commit from the current branch to the `head`.
 
-Sometimes, after you understand why reverted code was breaking, you want to bring the reverted code back into play and then fix it. You _could_ use the `revert` command in order to "revert the revert"; but, such terminology is unattractive. As such, you can `cherry-pick` the reverted commit to bring it back into `head` where you can then fix it and commit it:
+Sometimes, after you understand why reverted code was breaking, you want to bring the reverted code back into play and then fix it. You _could_ use the `revert` command in order to "revert the revert"; but, such terminology is unattractive. As such, you can `cherry-pick` the reverted commit to bring it back into the `head` where you can then fix it and commit it:
 
 ```sh
 git checkout master
@@ -256,17 +261,17 @@ git cherry-pick 19e771
 
 ### I want to update the files in the current commit.
 
-If you want to make changes to a commit after you've already committed the changes in your current working tree, you can use the `--amend` modifier. This will add any staged changes to the existing `head` commit.
+If you want to make changes to a commit after you've already committed the changes in your current working tree, you can use the `--amend` modifier. This will add any staged changes to the existing commit.
 
 ```sh
 git commit -m "Woot, finally finished!"
 
 # Oops, you forgot a change. Edit the file and stage it.
-touch oops.txt
-git add .
+# ... changes to the working tree (your file system).
+git add oops.txt
 
-# Adds the currently-staged changes (oops.txt) to the current `head` commit,
-# giving you a chance to updated the commit message.
+# Adds the currently-staged changes (oops.txt) to the current commit, giving
+# you a chance to update the commit message.
 git commit --amend
 ```
 
@@ -282,31 +287,34 @@ git commit -m "This is greet."
 git commit --amend -m "This is great."
 ```
 
-Note that if you omit the `-m message` portion of this command, you will be able to edit the commit message in your primary editor.
+Note that if you omit the `-m message` portion of this command, you will be able to edit the commit message in your configured editor.
 
 ### I want to copy `master` into my feature branch.
 
-At first, you may be tempted to simply `merge` your `master` branch into your feature branch, but doing so will create a Frankensteinian commit tree. Instead, you should `rebase` your feature branch on `master`. This will ensure that your feature commits are cleanly colocated in the commit tree:
+At first, you may be tempted to simply `merge` your `master` branch into your feature branch, but doing so will create an unattactive, non-intuitive, Frankensteinian commit tree. Instead, you should `rebase` your feature branch on `master`. This will ensure that your feature commits are cleanly colocated in the commit tree and align more closely with a human mental model:
 
 ```sh
 git checkout my-feature
 
 # This will unwind the commits specific to the `my-feature` branch, pull in
-# the `master` commits, and then replay your `my-feature` commits.
+# the missing `master` commits, and then replay your `my-feature` commits.
 git rebase master
 ```
 
-Once your `my-feature` branch has been rebased on `master`, you could then - if you wanted to - perform a `--ff-only` merge of your feature branch back into `master`:
+Once your `my-feature` branch has been rebased on `master`, you could then, if you wanted to, perform a `--ff-only` merge ("fast forward only") of your feature branch back into `master`:
 
 ```sh
-git checkout master
+git checkout my-feature
+git rebase master
 
 # Fast-forward merge of `my-feature` changes into `master`, which means there
-# is no creation of a "merge commit."
+# is no creation of a "merge commit" - your `my-features` changes are simply
+# added to the top of `master`.
+git checkout master
 git merge --ff-only my-feature
 ```
 
-That said, when you;re working on a team where everyone uses different git workflows, you will definitely _want_ a "merge commit". This way, multi-commit merges can be easily reverted. To force a "merge commit", you can use the `--no-ff` modifier:
+That said, when you're working on a team where everyone uses a different git workflow, you will definitely _want_ a "merge commit". This way, multi-commit merges can be easily reverted. To force a "merge commit", you can use the `--no-ff` modifier ("no fast forward"):
 
 ```sh
 # Get the `my-feature` branch ready for merge.
@@ -324,7 +332,7 @@ Now, if the merge needs to be reverted, you can simply revert the "merge commit"
 
 If you performed a `--ff-only` merge of your feature branch into `master`, there's no "easy" solution. You either have to reset the branch to an earlier commit (rewriting history); or, you have to revert the individual commits in the merge.
 
-If, however, you performed a `--no-ff` merge that created a "merge commit", all you have to do is revert the merge commit:
+If, however, you performed a `--no-ff` merge ("no fast forward") that created a "merge commit", all you have to do is revert the merge commit:
 
 ```sh
 git checkout master
