@@ -10,24 +10,24 @@ Future Ben, you are welcome!
 ## Table of Contents
 
 * [I want to show the status of the current branch.](#i-want-to-show-the-status-of-the-current-branch)
-* [I want to create a new branch based on the current branch.](#i-want-to-create-a-new-branch-based-on-the-current-branch)
+* [I want to create a new branch that is based on the current branch.](#i-want-to-create-a-new-branch-that-is-based-on-the-current-branch)
 * [I want to checkout the previous branch that I was on.](#i-want-to-checkout-the-previous-branch-that-i-was-on)
 * [I want to list the files that have been modified in the current working tree.](#i-want-to-list-the-files-that-have-been-modified-in-the-current-working-tree)
-* [I want to view the changes made in a given commit.](#i-want-to-view-the-changes-made-in-a-given-commit)
-* [I want to list the files changed in a given commit.](#i-want-to-list-the-files-changed-in-a-given-commit)
-* [I want to view the changes made across multiple commits.](#i-want-to-view-the-changes-made-across-multiple-commits)
-* [I want to view the changes made in a given file.](#i-want-to-view-the-changes-made-in-a-given-file)
+* [I want to view the changes that were made in a given commit.](#i-want-to-view-the-changes-that-were-made-in-a-given-commit)
+* [I want to list the files that were changed in a given commit.](#i-want-to-list-the-files-that-were-changed-in-a-given-commit)
+* [I want to view the changes that were made across multiple commits.](#i-want-to-view-the-changes-that-were-made-across-multiple-commits)
+* [I want to view the changes that were made in a given file.](#i-want-to-view-the-changes-that-were-made-in-a-given-file)
 * [I want to view the contents of a file in a given commit.](#i-want-to-view-the-contents-of-a-file-in-a-given-commit)
 * [I want to open the contents of a file in a given commit in my editor.](#i-want-to-open-the-contents-of-a-file-in-a-given-commit-in-my-editor)
 * [I want to copy a file from a given commit into my current working tree.](#i-want-to-copy-a-file-from-a-given-commit-into-my-current-working-tree)
 * [I want to copy the last commit from another branch into my branch.](#i-want-to-copy-the-last-commit-from-another-branch-into-my-branch)
-* [I want to copy an earlier commit on the current branch to the `head`.](#i-want-to-copy-an-earlier-commit-on-the-current-branch-to-the-head)
+* [I want to copy an earlier commit from the current branch to the `head`.](#i-want-to-copy-an-earlier-commit-from-the-current-branch-to-the-head)
 * [I want to update the files in the current commit.](#i-want-to-update-the-files-in-the-current-commit)
 * [I want to edit the current commit message.](#i-want-to-edit-the-current-commit-message)
 * [I want to copy `master` into my feature branch.](#i-want-to-copy-master-into-my-feature-branch)
 * [I want to revert the merge of my feature branch into `master`.](#i-want-to-revert-the-merge-of-my-feature-branch-into-master)
-* [I want to extract changes I accidentally made to `master`.](#i-want-to-extract-changes-i-accidentally-made-to-master)
-* [I want to undo the changes I've made to my branch.](#i-want-to-undo-the-changes-ive-made-to-my-branch)
+* [I want to extract changes that I accidentally made to `master`.](#i-want-to-extract-changes-that-i-accidentally-made-to-master)
+* [I want to undo the changes that I've made to my branch.](#i-want-to-undo-the-changes-that-ive-made-to-my-branch)
 * [I want to remove unpublished changes from my branch.](#i-want-to-remove-unpublished-changes-from-my-branch)
 * [I want to see which branches have already been merged into `master`.](#i-want-to-see-which-branches-have-already-been-merged-into-master)
 * [I want to see which branches have not yet been merged into `master`.](#i-want-to-see-which-branches-have-not-yet-been-merged-into-master)
@@ -342,30 +342,32 @@ git merge --no-ff my-feature
 
 # On noes! You didn't mean to merge that in. Assuming that the "merge commit"
 # is now the `head` of `master`, you can revert back to the commit's fist
-# parent, the `master` branch: -m 1.
+# parent, the `master` branch: -m 1. And, since `head` and `master` are the
+# same commit, the following are equivalent:
 git revert -m 1 head
+git revert -m 1 master
 ```
 
-### I want to extract changes I accidentally made to `master`.
+### I want to extract changes that I accidentally made to `master`.
 
 Sometimes, after you've finished working on your feature branch, you execute `git checkout master`, only find that you've been accidentally working on `master` the whole time (error: "Already on 'master'"). To fix this, you can `checkout` a new branch and `reset` your `master` branch:
 
 ```sh
 git checkout master
+# > error: Already on 'master'
 
-# Once on the `master` branch, create the `my-feature` branch as a copy of the
-# `master` branch. This way, your `my-feature` branch will contain all of your
-# recent changes.
+# While on the `master` branch, create the `my-feature` branch as a copy of
+# the `master` branch. This way, your `my-feature` branch will contain all of # your recent changes.
 git checkout -b my-feature
 
-# Now that your changes are safely extracted, get back into your `master` 
+# Now that your changes are safely isolated, get back into your `master`
 # branch and `reset` it with the `--hard` modifier so that your local index
 # and file system will match the remote copy.
 git checkout master
 git reset --hard origin/master
 ```
 
-### I want to undo the changes I've made to my branch.
+### I want to undo the changes that I've made to my branch.
 
 If you've edited some files and then change your mind about keeping those edits, you can reset the branch using the `--hard` modifier. This will update the working tree - your file structure - to match the structure of the last commit on the branch (`head`).
 
@@ -373,7 +375,7 @@ If you've edited some files and then change your mind about keeping those edits,
 
 ```sh
 git checkout my-feature
-touch temp.txt
+# ... changes to the working tree (your file system).
 git add .
 
 # Remove the file from staging AND remove the changes from the file system.
@@ -407,7 +409,7 @@ From any branch, you can locate the merged-in branches (that can be safely delet
 git checkout master
 
 # List all of the local branches that have been merged into `master`. This
-# command will be relative the branch you currently have checked-out.
+# command will be relative to the branch that you have checked-out.
 git branch --merged
 ```
 
@@ -419,7 +421,7 @@ From any branch, you can locate the unmerged branches by using the `--no-merged`
 git checkout master
 
 # List all of the local branches that have NOT YET been merged into `master`.
-# This command will be relative the branch you currently have checked-out.
+# This command will be relative the branch you have checked-out.
 git branch --no-merged
 ```
 
@@ -433,28 +435,29 @@ git checkout master
 git merge --no-ff my-feature
 
 # Safely delete the merged-in `my-feature` branch. The `-d` modifier will
-# error-out if given branch has not yet been merged into the current branch.
+# error-out if the given branch has not yet been merged into the current
+# branch.
 git branch -d my-feature
 ```
 
-If you want to abandon a feature branch, you can use the `-D` modifier to force delete it even if it has not yet been merged into `master`:
+If you want to abandon a feature branch, you can use the `-D` modifier to force-delete it even if it has not yet been merged into `master`:
 
 ```sh
 git checkout master
 
-# Force-delete the `my-feature` branch even though it has not been merged into
-# the `master` branch.
+# Force-delete the `my-feature` branch even though it has not been merged
+# into the `master` branch.
 git branch -D my-feature
 ```
 
 ### I want to delete a remote branch.
 
-When you delete a branch using `git branch -d`, it deletes your local copy; but, it doesn't delete the remote copy from your origin (GitHub). To delete the remote copy, you have to `push` the branch using the `:` prefix:
+When you delete a branch using `git branch -d`, it deletes your local copy; but, it doesn't delete the remote copy from your origin (ex, GitHub). To delete the remote copy, you have to `push` the branch using the `:` prefix:
 
 ```sh
 git checkout master
 
-# Safely delete your local copy of the `my-feature` branch. The `-d` modifier
+# Safely delete the local copy of your `my-feature` branch. The `-d` modifier
 # will error-out if the given branch has not been fully-merged into `master`.
 git branch -d my-feature
 
@@ -484,13 +487,13 @@ git push origin master
 
 ### I want to remove a file from my staging area.
 
-If you accidentally added too many files to the staging area (in preparation for a `git commit`), you can use `rm --cached` to remove them from the staging area but keep them in the working tree:
+If you accidentally added too many files to the staging area (in preparation for a `git commit`), you can use the `rm --cached` command to remove them from the staging area but keep them in the working tree:
 
 ```sh
 git add .
 
-# Oh noes! You didn't mean to add all the files to the staging area. You can
-# remove some of the staged files using the `--cached` modifier:
+# Oh noes! You didn't mean to add all of the files to the staging area. You
+# can remove some of the staged files using the `--cached` modifier:
 git rm --cached secrets.config
 ```
 
@@ -580,9 +583,10 @@ When you run `git merge --squash`, you copy the file-changes from one branch int
 Assuming your `my-feature` branch needs to be "fixed", you can use the following workflow:
 
 ```sh
-# Assuming you are on the `my-feature` branch, which is the branch that needs
-# to be fixed, start off my renaming the branch as a backup (the `-m` modifier
-# performs a rename):
+# Assuming that the `my-feature` branch is the branch that needs to be fixed,
+# start off my renaming the branch as a backup (the `-m` modifier performs a
+# rename):
+git checkout my-feature
 git branch -m my-feature-backup
 
 # Now, checkout the `master` branch and use it to create a new, clean
@@ -604,9 +608,11 @@ git commit -m "This feature is done and awesome."
 git branch -D my-feature-backup
 ```
 
+> **ASIDE**: You should almost never need to do this. If you find yourself having to do this a lot; or, you find yourself dealing with a lot of "conflict resolution", you need to reevaluate your `git` workflow. Chances are, your feature branches are living way too long.
+
 ### I want to temporarily set-aside my feature work.
 
-The life of a developer is typically "interrupt driven". As such, there is often a need to briefly set aside your current work in order to attend to more pressing matters. In such a case, it is _tempting_ to use `git stash` and `git stash pop` to store pending changes. But, _do not do this_. Stashing code requires unnecessary mental overhead. Instead, simply commit the changes to your current feature branch and the perform an interactive rebase later on to clean up your commits:
+The life of a developer is typically "interrupt driven". As such, there is often a need to briefly set aside your current work in order to attend to more pressing matters. In such a case, it is _tempting_ to use `git stash` and `git stash pop` to store pending changes. But, _do not do this_. Stashing code requires unnecessary mental overhead. Instead, simply commit the changes to your current feature branch and then perform an interactive rebase later on in order to clean up your commits:
 
 ```sh
 # Oh noes! Something urgent just came up - commit your changes to your feature
@@ -619,11 +625,11 @@ git checkout master
 
 Now, you never have to remember where those pending changes are. This guarantees that you won't lose your work.
 
-If you were working directly on `master` when urgent matters came up, you can still avoid having to use `git stash`. To keep your work, simply checkout a new branch and the commit your pending changes to that branch:
+If you were working directly on `master` when urgent matters came up, you can still avoid having to use `git stash`. To keep your work, simply checkout a new branch and the commit your pending changes to that new branch:
 
 ```sh
 # Oh noes! Something urgent just came up - checkout a new branch. This will
-# move all of your current state (staged and unstaged) over to the new branch.
+# move all of your current work (staged and unstaged) over to the new branch.
 git checkout -b temp-work
 
 # Commit any unstaged changes.
@@ -633,4 +639,4 @@ git commit -m "Saving current work - jumping to more urgent matters."
 git checkout master
 ```
 
-Now, your `master` branch should be back in a pristine state.
+Now, your `master` branch should be back in a pristine state and your `temp-work` branch can be continued later.
