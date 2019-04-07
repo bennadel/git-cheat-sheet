@@ -38,6 +38,7 @@ Future Ben, you are welcome!
 * [I want to squash several commits into one (or more) commits.](#i-want-to-squash-several-commits-into-one-or-more-commits)
 * [I want to squash several commits into one commit without using `rebase`.](#i-want-to-squash-several-commits-into-one-commit-without-using-rebase)
 * [I want to temporarily set-aside my feature work.](#i-want-to-temporarily-set-aside-my-feature-work)
+* [I want to keep my changes during conflict resolution.](#i-want-to-keep-my-changes-during-conflict-resolution)
 
 ## Use Cases
 
@@ -640,3 +641,56 @@ git checkout master
 ```
 
 Now, your `master` branch should be back in a pristine state and your `temp-work` branch can be continued later.
+
+### I want to keep my changes during conflict resolution.
+
+If your Git workflow is healthy - meaning that you have short-lived feature branches - conflicts should be very few and far between. In fact, I would assert that getting caught-up in frequent conflicts is an indication that something more fundamental to your workflow is primed for optimization.
+
+That said, conflicts do happen. And, if you want to resolve a conflict by selecting "your version" of a file, you can use `git checkout --theirs` in a `merge` conflict, a `cherry-pick` conflict, and a `rebase` conflict.
+
+In a `merge` conflict, `--theirs` indicates the branch being merged into the current context:
+
+```sh
+git checkout master
+git merge --no-ff my-feature
+
+# Oh noes! There is a conflict in "code.js". To keep your version of the
+# code.js file, you can check-it-out using --theirs and the file path:
+git checkout --theirs code.js
+git add .
+git merge --continue
+```
+
+Similarly, in a `cherry-pick` conflict, `--theirs` indicates the branch being cherry-picked into the current context:
+
+```sh
+git checkout master
+git cherry-pick --no-ff my-feature
+
+# Oh noes! There is a conflict in "code.js". To keep your version of the
+# code.js file, you can check-it-out using --theirs and the file path:
+git checkout --theirs code.js
+git add .
+git merge --continue
+```
+
+In a `rebase` conflict, `--theirs` indicates the branch that is being _replayed_ on top of the current context (**See Aside**):
+
+```sh
+git checkout my-feature
+git rebase master
+
+# Oh noes! There is a conflict in "code.js". To keep your version of the
+# code.js file, you can check-it-out using --theirs and the file path:
+git checkout --theirs code.js
+git add .
+git rebase --continue
+```
+
+> **ASIDE**: Using `--theirs` in a `rebase` can seem confusing because you are already in "your" feature branch. As such, it would seem logical that your version of the code would be targeted with `--ours`, not `--theirs`. However, a `rebase` operates _kind of like_ a series of `cherry-pick` operations. You can think of a `rebase` as doing the following:
+> 
+> * Check-out an earlier, common commit between your feature branch and the target branch.
+> * Cherry-pick your feature branch commits onto the earlier commit.
+> * Replace your feature branch with this temporary branch
+> 
+> With this mental model, "your" version - targeted using `--theirs` - is the version being cherry-picked into the "current context" (the temporary branch).
