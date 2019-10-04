@@ -19,7 +19,7 @@ Future Ben, you are welcome!
 * [I want to view the changes that were made in a given file.](#i-want-to-view-the-changes-that-were-made-in-a-given-file)
 * [I want to view the contents of a file in a given commit.](#i-want-to-view-the-contents-of-a-file-in-a-given-commit)
 * [I want to open the contents of a file in a given commit in my editor.](#i-want-to-open-the-contents-of-a-file-in-a-given-commit-in-my-editor)
-* [Eu quero copiar um arquivo de um determinado commit para meu diretório de trabalho atual.](#Eu-quero-copiar-um-arquivo-de-um-determinado-commit-para-meu-diretório-de-trabalho-atual.)
+* [Eu quero copiar um arquivo de um determinado commit para meu diretório de trabalho atual.](#eu-quero-copiar-um-arquivo-de-um-determinado-commit-para-meu-diretorio-de-trabalho-atual)
 * [I want to copy the last commit from another branch into my branch.](#i-want-to-copy-the-last-commit-from-another-branch-into-my-branch)
 * [I want to copy an earlier commit from the current branch to the `head`.](#i-want-to-copy-an-earlier-commit-from-the-current-branch-to-the-head)
 * [I want to update the files in the current commit.](#i-want-to-update-the-files-in-the-current-commit)
@@ -221,7 +221,7 @@ git show my-feature:README.md | subl
 git show 19e771:README.md | less
 ```
 
-### Eu quero copiar um arquivo de um determinado commit para meu diretório de trabalho atual.
+### Eu quero copiar um arquivo de um determinado commit para meu diretorio de trabalho atual.
 
 Normalmente, o comando `checkout` vai atualizar todo seu diretório para o ponto desse determinado commit. Contudo, você pode usar o modificador `--` para copiar (ou fazer checkout) de um único arquivo do commit para seu diretório atual:
 
