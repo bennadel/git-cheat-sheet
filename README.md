@@ -1,9 +1,9 @@
 
-# Folha de Dicas para Git
+# Git Dicas
 
 Por [Ben Nadel](https://www.bennadel.com) o futuro Ben Nadel_
 
-A API [git` é tão vasta] (https://git-scm.com/docs) e é tão esotérica que mal consigo manter uma fração de um por cento dela na minha cabeça. Como tal, eu queria esboçar alguns dos comandos que eu normalmente (e às vezes de maneira incomum) alcanço. Dessa forma, quando inevitavelmente fico preso e meu cérebro me falha, tenho algo a que posso me referir.
+A [API do `git` é tão vasta](https://git-scm.com/docs) e tão abstrata, que dificilmente poderá se manter uma fração de tudo em mente. Com isso, este é um esboço de alguns poucos comandos que normalmente são usados. Desta maneira, sempre que inevitavelmente a memória falhar, a uma fonte para se referenciar.
 
 Futuro Ben, de nada!
 
@@ -19,7 +19,7 @@ Futuro Ben, de nada!
 * [I want to view the changes that were made in a given file.](#i-want-to-view-the-changes-that-were-made-in-a-given-file)
 * [I want to view the contents of a file in a given commit.](#i-want-to-view-the-contents-of-a-file-in-a-given-commit)
 * [I want to open the contents of a file in a given commit in my editor.](#i-want-to-open-the-contents-of-a-file-in-a-given-commit-in-my-editor)
-* [I want to copy a file from a given commit into my current working tree.](#i-want-to-copy-a-file-from-a-given-commit-into-my-current-working-tree)
+* [Eu quero copiar um arquivo de um determinado commit para meu diretório de trabalho atual.](#eu-quero-copiar-um-arquivo-de-um-determinado-commit-para-meu-diretorio-de-trabalho-atual)
 * [I want to copy the last commit from another branch into my branch.](#i-want-to-copy-the-last-commit-from-another-branch-into-my-branch)
 * [I want to copy an earlier commit from the current branch to the `head`.](#i-want-to-copy-an-earlier-commit-from-the-current-branch-to-the-head)
 * [I want to update the files in the current commit.](#i-want-to-update-the-files-in-the-current-commit)
@@ -221,16 +221,17 @@ git show my-feature:README.md | subl
 git show 19e771:README.md | less
 ```
 
-### I want to copy a file from a given commit into my current working tree.
+### Eu quero copiar um arquivo de um determinado commit para meu diretorio de trabalho atual.
 
-Normally, the `checkout` command will update the entire working tree to point to a given commit. However, you can use the `--` modifier to copy (or checkout) a single file from the given commit into your working tree:
+Normalmente, o comando `checkout` vai atualizar todo seu diretório para o ponto desse determinado commit. Contudo, você pode usar o modificador `--` para copiar (ou fazer checkout) de um único arquivo do commit para seu diretório atual:
 
 ```sh
 git checkout my-feature
 
-# While staying on the `my-feature` branch, copy the `README.md` file from
-# the `master` branch into the current working tree. This will overwrite the
-# current version of `README.md` in your working tree.
+# Em quanto você estiver no galho (branch) `my-feature`, copie o arquivo `README.md`
+# do galho (branch) `master`, para o seu diretório de trabalho atual. Isto vai
+# sobreescrever a versão atual do `README.md` do seu diretório de trabalho.
+
 git checkout master -- README.md
 ```
 
