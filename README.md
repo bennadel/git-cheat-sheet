@@ -1,7 +1,7 @@
 
 # Git Dicas
 
-Por [Ben Nadel](https://www.bennadel.com) o futuro Ben Nadel_
+Por [Ben Nadel](https://www.bennadel.com) o futuro Ben Nadel.
 
 A [API do `git` é tão vasta](https://git-scm.com/docs) e tão abstrata, que dificilmente poderá se manter uma fração de tudo em mente. Com isso, este é um esboço de alguns poucos comandos que normalmente são usados. Desta maneira, sempre que inevitavelmente a memória falhar, a uma fonte para se referenciar.
 
