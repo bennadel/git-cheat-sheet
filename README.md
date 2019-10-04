@@ -1,11 +1,11 @@
 
-# git Cheat Sheet
+# Folha de Dicas para Git
 
-by [Ben Nadel](https://www.bennadel.com) for _future Ben Nadel_
+Por [Ben Nadel](https://www.bennadel.com) o futuro Ben Nadel_
 
-The [`git` API is so vast](https://git-scm.com/docs) and so esoteric, I can barely manage to keep a fraction of one-percent of it in my head. As such, I wanted to outline a few of the commands that I commonly (and sometimes uncommonly) reach for. This way, when I inevitably get stuck and my brain fails me, I have something that I can refer back to.
+A API [git` é tão vasta] (https://git-scm.com/docs) e é tão esotérica que mal consigo manter uma fração de um por cento dela na minha cabeça. Como tal, eu queria esboçar alguns dos comandos que eu normalmente (e às vezes de maneira incomum) alcanço. Dessa forma, quando inevitavelmente fico preso e meu cérebro me falha, tenho algo a que posso me referir.
 
-Future Ben, you are welcome!
+Futuro Ben, de nada!
 
 ## Table of Contents
 
