@@ -1,9 +1,9 @@
 
-# git Cheat Sheet
+# git Dicas
 
 by [Ben Nadel](https://www.bennadel.com) for _future Ben Nadel_
 
-The [`git` API is so vast](https://git-scm.com/docs) and so esoteric, I can barely manage to keep a fraction of one-percent of it in my head. As such, I wanted to outline a few of the commands that I commonly (and sometimes uncommonly) reach for. This way, when I inevitably get stuck and my brain fails me, I have something that I can refer back to.
+A [API do `git` é tão vasta](https://git-scm.com/docs) e tão abstrata, que dificilmente poderá se manter uma fração de tudo em mente. Com isso, este é um esboço de alguns poucos comandos que normalmente são usados. Desta maneira, sempre que inevitavelmente a memória falhar, a uma fonte para se referenciar.
 
 Future Ben, you are welcome!
 
