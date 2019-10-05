@@ -7,9 +7,9 @@ A [API do `git` é tão vasta](https://git-scm.com/docs) e tão abstrata, que di
 
 Futuro Ben, de nada!
 
-## Table of Contents
+## Índice de Conteúdo
 
-* [I want to show the status of the current branch.](#i-want-to-show-the-status-of-the-current-branch)
+* [Eu quero mostrar o status do branch atual.](#eu-quero-mostrar-o-status-do-branch-atual)
 * [I want to create a new branch that is based on the current branch.](#i-want-to-create-a-new-branch-that-is-based-on-the-current-branch)
 * [I want to checkout the previous branch that I was on.](#i-want-to-checkout-the-previous-branch-that-i-was-on)
 * [I want to list the files that have been modified in the current working tree.](#i-want-to-list-the-files-that-have-been-modified-in-the-current-working-tree)
@@ -40,11 +40,11 @@ Futuro Ben, de nada!
 * [I want to temporarily set-aside my feature work.](#i-want-to-temporarily-set-aside-my-feature-work)
 * [I want to keep my changes during conflict resolution.](#i-want-to-keep-my-changes-during-conflict-resolution)
 
-## Use Cases
+## Casos de Uso
 
-### I want to show the status of the current branch.
+### Eu quero mostrar o status do branch atual.
 
-The `status` command shows differences between the working tree, the index, and `head` commit.
+O comando `status` mostra as diferenças entre o diretório de trabalho, a área de preparação e o repositório.
 
 ```sh
 git status
