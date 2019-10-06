@@ -10,7 +10,7 @@ Futuro Ben, de nada!
 ## Table of Contents
 
 * [Eu quero mostrar o status do branch atual.](#Eu-quero-mostrar-o-status-do-branch-atual)
-* [I want to create a new branch that is based on the current branch.](#i-want-to-create-a-new-branch-that-is-based-on-the-current-branch)
+* [Eu quero criar um novo branch baseado no branch atual.](#Eu-quero-criar-um-novo-branch-baseado-no-branch-atual)
 * [I want to checkout the previous branch that I was on.](#i-want-to-checkout-the-previous-branch-that-i-was-on)
 * [I want to list the files that have been modified in the current working tree.](#i-want-to-list-the-files-that-have-been-modified-in-the-current-working-tree)
 * [I want to view the changes that were made in a given commit.](#i-want-to-view-the-changes-that-were-made-in-a-given-commit)
@@ -50,14 +50,14 @@ O comando `status` mostra as diferenças entre a arvore de trabalho (Pastas, arq
 git status
 ```
 
-### I want to create a new branch that is based on the current branch.
+### Eu quero criar um novo branch baseado no branch atual.
 
-In general, you want to implement new features in short-lived "feature branches" so that changes can be isolated. You can use the `checkout` command to create a new branch based on the current branch:
+Em geral, quando você quer implementar novos recursos em um “branch para recursos” de curta duração onde as modificações podem ser isoladas. Você pode usar o comando `checkout` para criar um novo branch baseado no seu branch atual:
 
 ```sh
 git checkout master
 
-# Creates a new branch, `my-feature`, based on `master`.
+# Criar um novo branch, `my-feature`, baseado no `master`.
 git checkout -b my-feature
 ```
 
