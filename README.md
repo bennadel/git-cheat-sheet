@@ -403,9 +403,9 @@ git fetch origin my-feature
 git reset --hard origin/my-feature
 ```
 
-### I want to see which branches have already been merged into `master`.
+### Quero ver quais branches já foram mescladas no `master`.
 
-From any branch, you can locate the merged-in branches (that can be safely deleted) by using the `--merged` modifier:
+De qualquer branch, você pode localizar as branches mescladas (que podem ser excluídas com segurança) usando o modificador `--merged`:
 
 ```sh
 git checkout master
@@ -415,9 +415,9 @@ git checkout master
 git branch --merged
 ```
 
-### I want to see which branches have not yet been merged into `master`.
+### Quero ver quais branchs ainda não foram mescladas no `master`.
 
-From any branch, you can locate the unmerged branches by using the `--no-merged` modifier:
+Em qualquer branch, você pode localizar as branches não unidas usando o modificador `--no-merged`:
 
 ```sh
 git checkout master
@@ -427,10 +427,9 @@ git checkout master
 git branch --no-merged
 ```
 
-### I want to delete my feature branch.
+### Eu quero excluir minha branch.
 
-After you're merged your feature branch into `master`, you can delete your feature branch using the `branch` command:
-
+Depois de mesclar sua branch no `master`, você pode excluir sua branch usando o comando` branch`:
 ```sh
 # Merge your `my-feature` branch into `master` creating a "merge commit."
 git checkout master
@@ -442,7 +441,7 @@ git merge --no-ff my-feature
 git branch -d my-feature
 ```
 
-If you want to abandon a feature branch, you can use the `-D` modifier to force-delete it even if it has not yet been merged into `master`:
+Se você deseja abandonar uma branch, pode usar o modificador `-D` para excluí-lo à força, mesmo que ainda não tenha sido mesclado no` master`:
 
 ```sh
 git checkout master
