@@ -7,10 +7,10 @@ A [API do `git` é tão vasta](https://git-scm.com/docs) e tão abstrata, que di
 
 Futuro Ben, de nada!
 
-## Table of Contents
+## Índice de Conteúdo
 
-* [Eu quero mostrar o status do branch atual.](#Eu-quero-mostrar-o-status-do-branch-atual)
-* [Eu quero criar um novo branch baseado no branch atual.](#Eu-quero-criar-um-novo-branch-baseado-no-branch-atual)
+* [Eu quero mostrar o status do branch atual.](#eu-quero-mostrar-o-status-do-branch-atual)
+* [Eu quero criar um novo branch baseado no branch atual.](#eu-quero-criar-um-novo-branch-baseado-no-branch-atual)
 * [I want to checkout the previous branch that I was on.](#i-want-to-checkout-the-previous-branch-that-i-was-on)
 * [I want to list the files that have been modified in the current working tree.](#i-want-to-list-the-files-that-have-been-modified-in-the-current-working-tree)
 * [I want to view the changes that were made in a given commit.](#i-want-to-view-the-changes-that-were-made-in-a-given-commit)
@@ -40,11 +40,11 @@ Futuro Ben, de nada!
 * [I want to temporarily set-aside my feature work.](#i-want-to-temporarily-set-aside-my-feature-work)
 * [I want to keep my changes during conflict resolution.](#i-want-to-keep-my-changes-during-conflict-resolution)
 
-## Use Cases
+## Casos de Uso
 
 ### Eu quero mostrar o status do branch atual.
 
-O comando `status` mostra as diferenças entre a arvore de trabalho (Pastas, arquivos e subpastas), o index e o commit `head` (último commit do branch).
+O comando `status` mostra as diferenças entre o diretório de trabalho, a área de preparação e o repositório.
 
 ```sh
 git status
