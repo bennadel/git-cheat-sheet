@@ -10,7 +10,7 @@ Futuro Ben, de nada!
 ## Índice de Conteúdo
 
 * [Eu quero mostrar o status do branch atual.](#eu-quero-mostrar-o-status-do-branch-atual)
-* [I want to create a new branch that is based on the current branch.](#i-want-to-create-a-new-branch-that-is-based-on-the-current-branch)
+* [Eu quero criar um novo branch baseado no branch atual.](#eu-quero-criar-um-novo-branch-baseado-no-branch-atual)
 * [I want to checkout the previous branch that I was on.](#i-want-to-checkout-the-previous-branch-that-i-was-on)
 * [I want to list the files that have been modified in the current working tree.](#i-want-to-list-the-files-that-have-been-modified-in-the-current-working-tree)
 * [I want to view the changes that were made in a given commit.](#i-want-to-view-the-changes-that-were-made-in-a-given-commit)
@@ -28,7 +28,7 @@ Futuro Ben, de nada!
 * [I want to revert the merge of my feature branch into `master`.](#i-want-to-revert-the-merge-of-my-feature-branch-into-master)
 * [I want to extract changes that I accidentally made to `master`.](#i-want-to-extract-changes-that-i-accidentally-made-to-master)
 * [I want to undo the changes that I've made to my branch.](#i-want-to-undo-the-changes-that-ive-made-to-my-branch)
-* [I want to remove unpublished changes from my branch.](#i-want-to-remove-unpublished-changes-from-my-branch)
+* [Eu quero remover modificações não puplicadas no meu branch.](#Eu-quero-remover-modificações-não-puplicadas-no-meu-branch)
 * [I want to see which branches have already been merged into `master`.](#i-want-to-see-which-branches-have-already-been-merged-into-master)
 * [I want to see which branches have not yet been merged into `master`.](#i-want-to-see-which-branches-have-not-yet-been-merged-into-master)
 * [I want to delete my feature branch.](#i-want-to-delete-my-feature-branch)
@@ -50,14 +50,14 @@ O comando `status` mostra as diferenças entre o diretório de trabalho, a área
 git status
 ```
 
-### I want to create a new branch that is based on the current branch.
+### Eu quero criar um novo branch baseado no branch atual.
 
-In general, you want to implement new features in short-lived "feature branches" so that changes can be isolated. You can use the `checkout` command to create a new branch based on the current branch:
+Em geral, quando você quer implementar novos recursos em um “branch para recursos” de curta duração onde as modificações podem ser isoladas. Você pode usar o comando `checkout` para criar um novo branch baseado no seu branch atual:
 
 ```sh
 git checkout master
 
-# Creates a new branch, `my-feature`, based on `master`.
+# Criar um novo branch, `my-feature`, baseado no `master`.
 git checkout -b my-feature
 ```
 
@@ -386,20 +386,20 @@ git reset --hard
 
 If you call `git reset` without the `--hard` option, it will reset the staging to match the `head` of the branch, but it will leave your file system in place. As such, you will be left with "unstaged changes" that can be modified and re-committed.
 
-### I want to remove unpublished changes from my branch.
+### Eu quero remover modificações não puplicadas no meu branch.
 
-If you've committed changes to the local copy of a remote (ie, published) branch, but you want to undo those changes, you can `reset` the local branch to match the remote branch:
+Se você fez um commit local de um branch remoto (publicado), mas quer reverter essas alterações, você pode `redefinir` a copia local para corresponder com o branch remoto: 
 
 ```sh
 git checkout my-feature
 
-# Update the remote copy of the `my-feature` branch in order to make sure that
-# you are working with the most up-to-date remote content.
+# Atualize a copia remota do branch `my-feature` para garantir que você está
+# trabalhando com a versão mais atualizada do conteúdo remoto.
 git fetch origin my-feature
 
-# Now, reset the local copy of `my-feature` to match the published copy. This
-# will update your index and your local file system to match the published
-# version of `my-feature`.
+# Agora, redefina a cópia local de `my-feature` para corresponder com a cópia publicada.
+# Isso vai atualizar seu index e seu sistema de arquivo local para corresponder com a versão publicada 
+# do `my-feature`.
 git reset --hard origin/my-feature
 ```
 
