@@ -738,7 +738,7 @@ git log --diff-filter=D --name-only --pretty=format:"%Cgreen%h - %an, %ar : %s" 
 
 To find a deleted file that contained a given piece of code, you can use the `git log` command and filter based on pattern matching within the diff. In this case, you want to use `--diff-filter=D` which limits the results to deleted files.
 
-You can use `-S` option to match on a string literal:
+You can use the `-S` option to match on a string literal:
 
 ```sh
 # Find the commit that deleted a file that contained the code 'isProcessed'.
