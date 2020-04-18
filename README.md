@@ -39,6 +39,8 @@ Future Ben, you are welcome!
 * [I want to squash several commits into one commit without using `rebase`.](#i-want-to-squash-several-commits-into-one-commit-without-using-rebase)
 * [I want to temporarily set-aside my feature work.](#i-want-to-temporarily-set-aside-my-feature-work)
 * [I want to keep my changes during conflict resolution.](#i-want-to-keep-my-changes-during-conflict-resolution)
+* [I want to find the commit that deleted a file.](#i-want-to-find-the-commit-that-deleted-a-file)
+* [I want to find the commit that deleted a file that contained a piece of code.](#i-want-to-find-the-commit-that-deleted-a-file-that-contained-a-piece-of-code)
 
 ## Use Cases
 
@@ -694,3 +696,95 @@ git rebase --continue
 > * Replace your feature branch with this temporary branch
 > 
 > With this mental model, "your" version - targeted using `--theirs` - is the version being cherry-picked into the "current context" (the temporary branch).
+
+### I want to find the commit that deleted a file.
+
+To find a deleted file, you can use the `git log` command and filter the results based on file status and path patterns. In this case, you want to use `--diff-filter=D` which limits the results to deleted files. And, since the files in question have been deleted, the path pattern must come after the final `--` delimiter:
+
+```sh
+# Find the commit that deleted the file "projects.js".
+git log --diff-filter=D --name-only -- wwwroot/app/projects.js
+```
+
+The `--name-only` option includes statistics about the commit (which files were changed); but, limits the file meta-data to include file paths only.
+
+Of course, since you are looking for a _delete file_, you may not remember the exact file path of the deleted file. In that case, you can use pattern matching on the file path:
+
+```sh
+# Find the commit that deleted the file "projects.js" that resided somewhere
+# in the "app" directory. The double-asterisk matches across directories.
+git log --diff-filter=D --name-only -- "wwwroot/app**/projects.js"
+
+# You can even use pattern matching on the file name itself if you can't
+# remember exactly what it was named.
+git log --diff-filter=D --name-only -- "wwwroot/**/*project*.js"
+```
+
+The default output of the `git log` command can be a bit verbose since it outputs the commit message along with the deleted files. To minify the output, you can use the `--oneline` and `--pretty` options:
+
+```sh
+# Find the commit that deleted the file "projects.js", but only show a one-line
+# commit message and the list of files.
+git log --diff-filter=D --name-only --oneline -- "wwwroot/app**/projects.js"
+
+# To get slightly easier-to-read output, you can use the `--pretty` option with
+# some specialized formatting (instead of the `--oneline` option). This
+# includes the abbreviated hash, the author, the relative date, and the
+# subject line. And, includes some human-friendly line-breaks.
+git log --diff-filter=D --name-only --pretty=format:"%Cgreen%h - %an, %ar : %s" -- "wwwroot/app**/projects.js"
+```
+
+### I want to find the commit that deleted a file that contained a piece of code.
+
+To find a deleted file that contained a given piece of code, you can use the `git log` command and filter based on pattern matching within the diff. In this case, you want to use `--diff-filter=D` which limits the results to deleted files.
+
+You can use `-S` option to match on a string literal:
+
+```sh
+# Find the commit that deleted a file that contained the code 'isProcessed'.
+git log -S 'isProcessed' --diff-filter=D --name-only
+
+# To limit the search to the "app" directory, you can include a file path after
+# the final `--` delimiter.
+git log -S 'isProcessed' --diff-filter=D --name-only -- wwwroot/app/
+
+# To make the search case-insensitive, include the -i option.
+git log -S 'isprocessed' -i --diff-filter=D --name-only
+```
+
+You can use the `-G` option to match on a Regular Expression pattern instead of a string literal:
+
+```sh
+# Find the commit that deleted a file that contained the code `isProcessed`,
+# matching on strict word-boundaries.
+git log -G '\bisProcessed\b' --diff-filter=D --name-only
+
+# To make the search case-insensitive, include the `-i` option.
+git log -G '\bisprocessed\b' -i --diff-filter=D --name-only
+```
+
+The default output of the `git log` command can be a bit verbose since it outputs the commit message along with the deleted files. To minify the output, you can use the `--oneline` and `--pretty` options:
+
+```sh
+# Find the commit that deleted a file that contained the code `isProcessed`,
+# matching on strict word-boundaries.
+git log -G '\bisProcessed\b' --diff-filter=D --name-only --oneline
+
+# To get slightly easier-to-read output, you can use the `--pretty` option with
+# some specialized formatting (instead of the `--oneline` option). This
+# includes the abbreviated hash, the author, the relative date, and the
+# subject line. And, includes some human-friendly line-breaks.
+git log -G '\bisProcessed\b' --diff-filter=D --name-only --pretty=format:"%Cgreen%h - %an, %ar : %s"
+```
+
+Once you locate the commit that appears to contain your code, you can use the `git show` command to view the contents of the commit delta:
+
+```sh
+# Find the commit that deleted a file that contained the code `isProcessed`,
+# matching on strict word-boundaries.
+git log -G '\bisProcessed\b' --diff-filter=D --name-only --oneline
+
+# The above `log` action listed commit `aef037`. Use `git show` to output the
+# changes made in the given commit.
+git show aef037
+```
