@@ -1,16 +1,16 @@
 
-# git Cheat Sheet
+# Git Dicas
 
-by [Ben Nadel](https://www.bennadel.com) for _future Ben Nadel_
+Por [Ben Nadel](https://www.bennadel.com) o futuro Ben Nadel.
 
-The [`git` API is so vast](https://git-scm.com/docs) and so esoteric, I can barely manage to keep a fraction of one-percent of it in my head. As such, I wanted to outline a few of the commands that I commonly (and sometimes uncommonly) reach for. This way, when I inevitably get stuck and my brain fails me, I have something that I can refer back to.
+A [API do `git` é tão vasta](https://git-scm.com/docs) e tão abstrata, que dificilmente poderá se manter uma fração de tudo em mente. Com isso, este é um esboço de alguns poucos comandos que normalmente são usados. Desta maneira, sempre que inevitavelmente a memória falhar, a uma fonte para se referenciar.
 
-Future Ben, you are welcome!
+Futuro Ben, de nada!
 
-## Table of Contents
+## Índice de Conteúdo
 
-* [I want to show the status of the current branch.](#i-want-to-show-the-status-of-the-current-branch)
-* [I want to create a new branch that is based on the current branch.](#i-want-to-create-a-new-branch-that-is-based-on-the-current-branch)
+* [Eu quero mostrar o status do branch atual.](#eu-quero-mostrar-o-status-do-branch-atual)
+* [Eu quero criar um novo branch baseado no branch atual.](#eu-quero-criar-um-novo-branch-baseado-no-branch-atual)
 * [I want to checkout the previous branch that I was on.](#i-want-to-checkout-the-previous-branch-that-i-was-on)
 * [I want to list the files that have been modified in the current working tree.](#i-want-to-list-the-files-that-have-been-modified-in-the-current-working-tree)
 * [I want to view the changes that were made in a given commit.](#i-want-to-view-the-changes-that-were-made-in-a-given-commit)
@@ -19,7 +19,7 @@ Future Ben, you are welcome!
 * [I want to view the changes that were made in a given file.](#i-want-to-view-the-changes-that-were-made-in-a-given-file)
 * [I want to view the contents of a file in a given commit.](#i-want-to-view-the-contents-of-a-file-in-a-given-commit)
 * [I want to open the contents of a file in a given commit in my editor.](#i-want-to-open-the-contents-of-a-file-in-a-given-commit-in-my-editor)
-* [I want to copy a file from a given commit into my current working tree.](#i-want-to-copy-a-file-from-a-given-commit-into-my-current-working-tree)
+* [Eu quero copiar um arquivo de um determinado commit para meu diretório de trabalho atual.](#eu-quero-copiar-um-arquivo-de-um-determinado-commit-para-meu-diretorio-de-trabalho-atual)
 * [I want to copy the last commit from another branch into my branch.](#i-want-to-copy-the-last-commit-from-another-branch-into-my-branch)
 * [I want to copy an earlier commit from the current branch to the `head`.](#i-want-to-copy-an-earlier-commit-from-the-current-branch-to-the-head)
 * [I want to update the files in the current commit.](#i-want-to-update-the-files-in-the-current-commit)
@@ -28,7 +28,7 @@ Future Ben, you are welcome!
 * [I want to revert the merge of my feature branch into `master`.](#i-want-to-revert-the-merge-of-my-feature-branch-into-master)
 * [I want to extract changes that I accidentally made to `master`.](#i-want-to-extract-changes-that-i-accidentally-made-to-master)
 * [I want to undo the changes that I've made to my branch.](#i-want-to-undo-the-changes-that-ive-made-to-my-branch)
-* [I want to remove unpublished changes from my branch.](#i-want-to-remove-unpublished-changes-from-my-branch)
+* [Eu quero remover modificações não puplicadas no meu branch.](#Eu-quero-remover-modificações-não-puplicadas-no-meu-branch)
 * [I want to see which branches have already been merged into `master`.](#i-want-to-see-which-branches-have-already-been-merged-into-master)
 * [I want to see which branches have not yet been merged into `master`.](#i-want-to-see-which-branches-have-not-yet-been-merged-into-master)
 * [I want to delete my feature branch.](#i-want-to-delete-my-feature-branch)
@@ -42,24 +42,24 @@ Future Ben, you are welcome!
 * [I want to find the commit that deleted a file.](#i-want-to-find-the-commit-that-deleted-a-file)
 * [I want to find the commit that deleted a file that contained a piece of code.](#i-want-to-find-the-commit-that-deleted-a-file-that-contained-a-piece-of-code)
 
-## Use Cases
+## Casos de Uso
 
-### I want to show the status of the current branch.
+### Eu quero mostrar o status do branch atual.
 
-The `status` command shows differences between the working tree, the index, and `head` commit.
+O comando `status` mostra as diferenças entre o diretório de trabalho, a área de preparação e o repositório.
 
 ```sh
 git status
 ```
 
-### I want to create a new branch that is based on the current branch.
+### Eu quero criar um novo branch baseado no branch atual.
 
-In general, you want to implement new features in short-lived "feature branches" so that changes can be isolated. You can use the `checkout` command to create a new branch based on the current branch:
+Em geral, quando você quer implementar novos recursos em um “branch para recursos” de curta duração onde as modificações podem ser isoladas. Você pode usar o comando `checkout` para criar um novo branch baseado no seu branch atual:
 
 ```sh
 git checkout master
 
-# Creates a new branch, `my-feature`, based on `master`.
+# Criar um novo branch, `my-feature`, baseado no `master`.
 git checkout -b my-feature
 ```
 
@@ -223,16 +223,17 @@ git show my-feature:README.md | subl
 git show 19e771:README.md | less
 ```
 
-### I want to copy a file from a given commit into my current working tree.
+### Eu quero copiar um arquivo de um determinado commit para meu diretorio de trabalho atual.
 
-Normally, the `checkout` command will update the entire working tree to point to a given commit. However, you can use the `--` modifier to copy (or checkout) a single file from the given commit into your working tree:
+Normalmente, o comando `checkout` vai atualizar todo seu diretório para o ponto desse determinado commit. Contudo, você pode usar o modificador `--` para copiar (ou fazer checkout) de um único arquivo do commit para seu diretório atual:
 
 ```sh
 git checkout my-feature
 
-# While staying on the `my-feature` branch, copy the `README.md` file from
-# the `master` branch into the current working tree. This will overwrite the
-# current version of `README.md` in your working tree.
+# Em quanto você estiver no galho (branch) `my-feature`, copie o arquivo `README.md`
+# do galho (branch) `master`, para o seu diretório de trabalho atual. Isto vai
+# sobreescrever a versão atual do `README.md` do seu diretório de trabalho.
+
 git checkout master -- README.md
 ```
 
@@ -387,26 +388,26 @@ git reset --hard
 
 If you call `git reset` without the `--hard` option, it will reset the staging to match the `head` of the branch, but it will leave your file system in place. As such, you will be left with "unstaged changes" that can be modified and re-committed.
 
-### I want to remove unpublished changes from my branch.
+### Eu quero remover modificações não puplicadas no meu branch.
 
-If you've committed changes to the local copy of a remote (ie, published) branch, but you want to undo those changes, you can `reset` the local branch to match the remote branch:
+Se você fez um commit local de um branch remoto (publicado), mas quer reverter essas alterações, você pode `redefinir` a copia local para corresponder com o branch remoto: 
 
 ```sh
 git checkout my-feature
 
-# Update the remote copy of the `my-feature` branch in order to make sure that
-# you are working with the most up-to-date remote content.
+# Atualize a copia remota do branch `my-feature` para garantir que você está
+# trabalhando com a versão mais atualizada do conteúdo remoto.
 git fetch origin my-feature
 
-# Now, reset the local copy of `my-feature` to match the published copy. This
-# will update your index and your local file system to match the published
-# version of `my-feature`.
+# Agora, redefina a cópia local de `my-feature` para corresponder com a cópia publicada.
+# Isso vai atualizar seu index e seu sistema de arquivo local para corresponder com a versão publicada 
+# do `my-feature`.
 git reset --hard origin/my-feature
 ```
 
-### I want to see which branches have already been merged into `master`.
+### Quero ver quais branches já foram mescladas no `master`.
 
-From any branch, you can locate the merged-in branches (that can be safely deleted) by using the `--merged` modifier:
+De qualquer branch, você pode localizar as branches mescladas (que podem ser excluídas com segurança) usando o modificador `--merged`:
 
 ```sh
 git checkout master
@@ -416,9 +417,9 @@ git checkout master
 git branch --merged
 ```
 
-### I want to see which branches have not yet been merged into `master`.
+### Quero ver quais branchs ainda não foram mescladas no `master`.
 
-From any branch, you can locate the unmerged branches by using the `--no-merged` modifier:
+Em qualquer branch, você pode localizar as branches não unidas usando o modificador `--no-merged`:
 
 ```sh
 git checkout master
@@ -428,10 +429,9 @@ git checkout master
 git branch --no-merged
 ```
 
-### I want to delete my feature branch.
+### Eu quero excluir minha branch.
 
-After you're merged your feature branch into `master`, you can delete your feature branch using the `branch` command:
-
+Depois de mesclar sua branch no `master`, você pode excluir sua branch usando o comando` branch`:
 ```sh
 # Merge your `my-feature` branch into `master` creating a "merge commit."
 git checkout master
@@ -443,7 +443,7 @@ git merge --no-ff my-feature
 git branch -d my-feature
 ```
 
-If you want to abandon a feature branch, you can use the `-D` modifier to force-delete it even if it has not yet been merged into `master`:
+Se você deseja abandonar uma branch, pode usar o modificador `-D` para excluí-lo à força, mesmo que ainda não tenha sido mesclado no` master`:
 
 ```sh
 git checkout master
